@@ -1,0 +1,24 @@
+Package: nestr
+Title: Easily make data frame with nesting or hierarchical structures
+Version: 0.0.0.9000
+Authors@R: 
+    person(given = "Emi",
+           family = "Tanaka",
+           role = c("aut", "cre"),
+           email = "dr.emi.tanaka@gmail.com",
+           comment = c(ORCID = "0000-0002-1455-259X"))
+Description: What the package does (one paragraph).
+License: GPL3 + file LICENSE
+Encoding: UTF-8
+Language: es
+LazyData: true
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.1.1
+Imports: 
+    magrittr,
+    tidyselect,
+    R6,
+    rlang
+Suggests: 
+    testthat (>= 3.0.0)
+Config/testthat/edition: 3
