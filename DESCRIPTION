@@ -1,5 +1,5 @@
 Package: nestr
-Title: Easily make data frame with nesting or hierarchical structures
+Title: Build nesting or hierarchical structures
 Version: 0.0.0.9000
 Authors@R: 
     person(given = "Emi",
@@ -7,7 +7,7 @@ Authors@R:
            role = c("aut", "cre"),
            email = "dr.emi.tanaka@gmail.com",
            comment = c(ORCID = "0000-0002-1455-259X"))
-Description: What the package does (one paragraph).
+Description: Tools to build nesting or hierarchical strucures.
 License: GPL3 + file LICENSE
 Encoding: UTF-8
 Language: es
