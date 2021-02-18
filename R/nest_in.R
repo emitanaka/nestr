@@ -74,7 +74,7 @@ nest_in <- function(.x, ..., name = "child",
   x_name <- name_parent %||%
     tryCatch(as_string(enexpr(.x)), error = function(x) "parent")
   dots <- enquos(...)
-  levels <- unique(.x)
+  levels <- as.character(unique(.x))
   levels_left <- levels
   prefix <- prefix %||% ""
   suffix <- suffix %||% ""
@@ -108,13 +108,13 @@ nest_in <- function(.x, ..., name = "child",
   }
   names(reps) <- levels
   out <- list()
-  out[[x_name]] <- rep(.x, times = reps[.x])
+  out[[x_name]] <- rep(.x, times = reps[as.character(.x)])
 
   if(unique) {
     out[[name]] <- make_labels(leading0, sum(reps), prefix, suffix)
   } else {
     labels <- make_labels(leading0, max(reps), prefix, suffix)
-    out[[name]] <- unlist(lapply(reps[.x], function(n) labels[1:n]))
+    out[[name]] <- unlist(lapply(reps[as.character(.x)], function(n) labels[1:n]))
   }
   out <- as.data.frame(out)
   rownames(out) <- NULL
