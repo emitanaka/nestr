@@ -4,9 +4,9 @@
 \name{nestr-package}
 \alias{nestr}
 \alias{nestr-package}
-\title{nestr: Easily make data frame with nesting or hierarchical structures}
+\title{nestr: Build nesting or hierarchical structures}
 \description{
-What the package does (one paragraph).
+Tools to build nesting or hierarchical strucures.
 }
 \author{
 \strong{Maintainer}: Emi Tanaka \email{dr.emi.tanaka@gmail.com} (\href{https://orcid.org/0000-0002-1455-259X}{ORCID})
