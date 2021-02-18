@@ -31,13 +31,13 @@ test_that("nesting", {
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
-                       . ~ 2, leading0 = TRUE, min_ndigits = 4),
+                       . ~ 2, leading0 = 4),
                data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
                           child = sprintf("%.4d", c(1:10, 1, 2, 1, 2))))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
-                       . ~ 2, leading0 = TRUE, min_ndigits = 4,
+                       . ~ 2, leading0 = 4,
                        suffix = "test", prefix = "pre"),
                data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
                           child = sprintf("pre%.4dtest", c(1:10, 1, 2, 1, 2))))
