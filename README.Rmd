@@ -53,8 +53,7 @@ nest_in(farmer,
                     . ~ 3,
         name = "chick",
         prefix = "chick-",
-        leading0 = TRUE,
-        min_ndigits = 4)
+        leading0 = 4)
 ```
 
 
