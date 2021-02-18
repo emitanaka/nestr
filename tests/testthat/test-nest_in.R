@@ -47,4 +47,11 @@ test_that("nesting", {
                        . ~ 2, name = "student", name_parent = "class"),
                data.frame(class = rep(c("A", "B", "C"), c(10, 2, 2)),
                           student = sprintf("student%d", c(1:10, 1, 2, 1, 2))))
+
+  expect_equal(nest_in(2:4,
+                       1 ~ 3,
+                       2 ~ 4,
+                       3 ~ 2),
+               data.frame(parent = rep(2:4, times = c(3, 4, 2)),
+                          child = as.character(c(1:3, 1:4, 1:2))))
 })
