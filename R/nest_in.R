@@ -1,9 +1,13 @@
 #' @export
-nest_in <- function(.x, ..., name = "y", prefix = name, suffix = NULL, unique = FALSE) {
-  x_name <- tryCatch(as_string(enexpr(.x)), error = function(x) 'x')
+nest_in <- function(.x, ..., name = "child", prefix = NULL, suffix = NULL,
+                    unique = FALSE, leading0 = FALSE, min_ndigits = NULL,
+                    name_parent = "parent") {
+  x_name <- tryCatch(as_string(enexpr(.x)), error = function(x) name_parent)
   dots <- enquos(...)
   levels <- unique(.x)
   levels_left <- levels
+  prefix <- prefix %||% ""
+  suffix <- suffix %||% ""
   reps <- vector(mode = "integer", length = length(levels))
   for(i in seq_along(dots)) {
     expr <- quo_get_expr(dots[[i]])
@@ -37,10 +41,20 @@ nest_in <- function(.x, ..., name = "y", prefix = name, suffix = NULL, unique = 
   out[[x_name]] <- rep(.x, times = reps[.x])
 
   if(unique) {
-    out[[name]] <- paste0(prefix, 1:sum(reps), suffix)
+    out[[name]] <- make_labels(leading0, min_ndigits, sum(reps), prefix, suffix)
   } else {
-    labels <- paste0(prefix, 1:max(reps), suffix)
+    labels <- make_labels(leading0, min_ndigits, max(reps), prefix, suffix)
     out[[name]] <- unlist(lapply(reps[.x], function(n) labels[1:n]))
   }
-  as.data.frame(out)
+  out <- as.data.frame(out)
+  rownames(out) <- NULL
+  out
+}
+
+make_labels <- function(leading0, min_ndigits, n, prefix, suffix) {
+  if(leading0) {
+    sprintf(paste0("%s%.", ndigits(n, min_ndigits), "d%s"), prefix, 1:n, suffix)
+  } else {
+    paste0(prefix, 1:n, suffix)
+  }
 }
