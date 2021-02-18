@@ -1,0 +1,47 @@
+---
+output: github_document
+---
+
+<!-- README.md is generated from README.Rmd. Please edit that file -->
+
+```{r, include = FALSE}
+knitr::opts_chunk$set(
+  collapse = TRUE,
+  comment = "#>",
+  fig.path = "man/figures/README-",
+  out.width = "100%"
+)
+```
+
+# nestr
+
+<!-- badges: start -->
+[![Lifecycle: experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+<!-- badges: end -->
+
+```{r}
+library(nestr)
+```
+
+```{r}
+nest_in(1:3, 
+        1 ~ 3,
+        . ~ 1)
+```
+
+
+
+
+
+
+For those who want to stay within the tidyverse framework, this is in fact doable just using `dplyr` and `tidyr`. 
+
+```{r, message = FALSE, warning = FALSE}
+library(tidyverse)
+data.frame(x = 1:3) %>% 
+  mutate(y = case_when(x==1 ~ list(1:3),
+                       TRUE ~ list(1:2))) %>% 
+  unnest_longer(y)
+```
+
+The semantics are less direct, however and chaining of nesting structure is cumbersome.
