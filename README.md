@@ -87,7 +87,7 @@ nest_in(farmer,
 
 ## `amplify`
 
-Not implemented yet.
+**Needs fixing**
 
 The `dplyr::mutate` function modifies, creates or deletes columns but
 doesn’t alter the number of rows. The `nestr::amplify` function can
@@ -99,7 +99,8 @@ An amplified gene is just a duplication of the original. A mutated gene
 modifies the original state.
 
 ``` r
-data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>% 
+# needs fixing
+df <- data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>% 
   amplify(person = nest_in(country, 
                             "AU" ~ 20,
                             "NZ" ~ 10,
@@ -107,6 +108,9 @@ data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>%
           child = nest_in(person, 
                           1:10 ~ 3,
                              . ~ 2))
+
+table(df$country, df$person)
+table(df$person, df$child)
 ```
 
 ## `tidyverse`
