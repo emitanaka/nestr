@@ -127,17 +127,21 @@
 <h2 class="hasAnchor">
 <a href="#amplify" class="anchor"></a><code>amplify</code>
 </h2>
-<p>Not implemented yet.</p>
+<p><strong>Needs fixing</strong></p>
 <p>The <code>dplyr::mutate</code> function modifies, creates or deletes columns but doesn’t alter the number of rows. The <code><a href="reference/amplify.html">nestr::amplify</a></code> function can create new columns which generally increase (or amplify) the size of the row dimension. The columns that were amplified as a result of the created column will be duplicated. If you are familiar with gene replication process then you can recall these functions in those terms. An amplified gene is just a duplication of the original. A mutated gene modifies the original state.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+<code class="sourceCode R"><span class="co"># needs fixing</span>
+<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>person <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">country</span>, 
                             <span class="st">"AU"</span> <span class="op">~</span> <span class="fl">20</span>,
                             <span class="st">"NZ"</span> <span class="op">~</span> <span class="fl">10</span>,
                                <span class="va">.</span> <span class="op">~</span> <span class="fl">100</span><span class="op">)</span>,
           child <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">person</span>, 
                           <span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">~</span> <span class="fl">3</span>,
-                             <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span></code></pre></div>
+                             <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">country</span>, <span class="va">df</span><span class="op">$</span><span class="va">person</span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">person</span>, <span class="va">df</span><span class="op">$</span><span class="va">child</span><span class="op">)</span></code></pre></div>
 </div>
 <div id="tidyverse" class="section level2">
 <h2 class="hasAnchor">
