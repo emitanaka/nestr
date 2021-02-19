@@ -1,4 +1,4 @@
 test_that("amplify", {
   data.frame(x = 1:2) %>%
-    amplify(y = nested_in(x, 3))
+    amplify(y = nest_in(x, 3))
 })

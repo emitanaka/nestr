@@ -22,13 +22,14 @@ amplify.data.frame <- function(.data, ...,
     new <- setdiff(names(cols), names(.data))
     out <- relocate(out, !!new, .before = !!.before, .after = !!.after)
   }
+  out
 }
 
 
 # Helpers -----------------------------------------------------------------
 
 
-amplify_cols <- function(.data, ...) {
+amplify_data <- function(.data, ...) {
   dots <- enquos(...)
   dots_names <- names(dots)
   auto_named_dots <- names(enquos(..., .named = TRUE))
