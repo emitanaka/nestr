@@ -46,12 +46,10 @@ Unlike `edibble::nested_in`, the `nestr::nest_in` returns a data frame. You may 
 A more interesing example.
 
 ```{r}
-farmer <- c("John", "Jane", "Ann", "Thomas", "Helen")
-nest_in(farmer, 
+nest_in(c("John", "Jane", "Ann", "Thomas", "Helen"), 
                "John" ~ 2,
     c("Ann", "Helen") ~ 10,
                     . ~ 3,
-        name = "chick",
         prefix = "chick-",
         leading0 = 4)
 ```

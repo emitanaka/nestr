@@ -27,12 +27,14 @@ unbalanced across the parental levels.
 nest_in(1:3, # parental vector
         1 ~ 3, # level 1 has 3 children
         . ~ 1) # the remaining levels have 1 child 
-#>   parent child
-#> 1      1     1
-#> 2      1     2
-#> 3      1     3
-#> 4      2     1
-#> 5      3     1
+#> $`1`
+#> [1] "1" "2" "3"
+#> 
+#> $`2`
+#> [1] "1"
+#> 
+#> $`3`
+#> [1] "1"
 ```
 
 Unlike `edibble::nested_in`, the `nestr::nest_in` returns a data frame.
@@ -46,43 +48,28 @@ to create a structure in the present.
 A more interesing example.
 
 ``` r
-farmer <- c("John", "Jane", "Ann", "Thomas", "Helen")
-nest_in(farmer, 
+nest_in(c("John", "Jane", "Ann", "Thomas", "Helen"), 
                "John" ~ 2,
     c("Ann", "Helen") ~ 10,
                     . ~ 3,
-        name = "chick",
         prefix = "chick-",
         leading0 = 4)
-#>    farmer      chick
-#> 1    John chick-0001
-#> 2    John chick-0002
-#> 3    Jane chick-0001
-#> 4    Jane chick-0002
-#> 5    Jane chick-0003
-#> 6     Ann chick-0001
-#> 7     Ann chick-0002
-#> 8     Ann chick-0003
-#> 9     Ann chick-0004
-#> 10    Ann chick-0005
-#> 11    Ann chick-0006
-#> 12    Ann chick-0007
-#> 13    Ann chick-0008
-#> 14    Ann chick-0009
-#> 15    Ann chick-0010
-#> 16 Thomas chick-0001
-#> 17 Thomas chick-0002
-#> 18 Thomas chick-0003
-#> 19  Helen chick-0001
-#> 20  Helen chick-0002
-#> 21  Helen chick-0003
-#> 22  Helen chick-0004
-#> 23  Helen chick-0005
-#> 24  Helen chick-0006
-#> 25  Helen chick-0007
-#> 26  Helen chick-0008
-#> 27  Helen chick-0009
-#> 28  Helen chick-0010
+#> $John
+#> [1] "chick-0001" "chick-0002"
+#> 
+#> $Jane
+#> [1] "chick-0001" "chick-0002" "chick-0003"
+#> 
+#> $Ann
+#>  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"
+#>  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"
+#> 
+#> $Thomas
+#> [1] "chick-0001" "chick-0002" "chick-0003"
+#> 
+#> $Helen
+#>  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"
+#>  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"
 ```
 
 ## `amplify`
