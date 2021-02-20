@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Calculate margin statistics — margin_with • nestr</title>
+<title>Link data frames as a chain — chain • nestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,8 @@
 
 
 
-<meta property="og:title" content="Calculate margin statistics — margin_with" />
-<meta property="og:description" content="Calculate margin statistics" />
+<meta property="og:title" content="Link data frames as a chain — chain" />
+<meta property="og:description" content="Link data frames as a chain" />
 
 
 
@@ -103,52 +103,40 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Calculate margin statistics</h1>
+    <h1>Link data frames as a chain</h1>
     
-    <div class="hidden name"><code>margin_with.Rd</code></div>
+    <div class="hidden name"><code>chain.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Calculate margin statistics</p>
+    <p>Link data frames as a chain</p>
     </div>
 
-    <pre class="usage"><span class='fu'>margin_with</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span>, .group_by <span class='op'>=</span> <span class='cn'>NULL</span>, .keyname <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>chain</span><span class='op'>(</span><span class='va'>...</span>, .class <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
-      <th>.x</th>
-      <td><p>A vector.</p></td>
-    </tr>
-    <tr>
-      <th>.f</th>
-      <td><p>A function to evaluate for the given group.</p></td>
-    </tr>
-    <tr>
-      <th>.group_by</th>
-      <td><p>The indexing group for <code>.f</code>.</p></td>
+      <th>...</th>
+      <td><p>A name-value pair where value is a data frame. The supplied
+data frame should be linked by a key. The link is determined automatically by
+the intersection of the column names but may be set manually by <code>link</code>.</p></td>
     </tr>
     </table>
 
-    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
-
-    <p>A named list where name corresponds to group levels and
-entries to the results of <code>.f</code>.</p>
 
     <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
-    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>PlantGrowth</span>, <span class='fu'>margin_with</span><span class='op'>(</span><span class='va'>weight</span>, <span class='va'>sum</span>, .group_by <span class='op'>=</span> <span class='va'>group</span><span class='op'>)</span><span class='op'>)</span>
-</div><div class='output co'>#&gt; $ctrl
-#&gt; [1] 50.32
-#&gt; 
-#&gt; $trt1
-#&gt; [1] 46.61
-#&gt; 
-#&gt; $trt2
-#&gt; [1] 55.26
-#&gt; 
-#&gt; attr(,"keyname")
-#&gt; [1] "group"</div></pre>
+    <pre class="examples"><div class='input'><span class='va'>vs_info</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>engine <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, info <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"flat"</span>, <span class='st'>"unknown"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>chain</span><span class='op'>(</span>original <span class='op'>=</span> <span class='va'>mtcars</span>,
+      vs_total <span class='op'>=</span> <span class='fu'><a href='https://dplyr.tidyverse.org/reference/group_by.html'>group_by</a></span><span class='op'>(</span><span class='va'>original</span>, <span class='va'>vs</span><span class='op'>)</span> <span class='op'>%&gt;%</span>
+                  <span class='fu'><a href='https://dplyr.tidyverse.org/reference/summarise.html'>summarise</a></span><span class='op'>(</span><span class='fu'><a href='https://dplyr.tidyverse.org/reference/across.html'>across</a></span><span class='op'>(</span><span class='fu'><a href='https://tidyselect.r-lib.org/reference/everything.html'>everything</a></span><span class='op'>(</span><span class='op'>)</span>, <span class='va'>sum</span><span class='op'>)</span><span class='op'>)</span>,
+      vs_dict <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>vs <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='fl'>0</span>, <span class='fl'>1</span><span class='op'>)</span>, engine <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"V-shaped"</span>, <span class='st'>"Straight"</span><span class='op'>)</span><span class='op'>)</span>,
+      vs_info <span class='op'>=</span> <span class='fu'>link</span><span class='op'>(</span><span class='va'>vs_info</span>, <span class='va'>original</span>, .by <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span>vs <span class='op'>=</span> <span class='st'>"engine"</span><span class='op'>)</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; <span class='error'>Error in summarise(., across(everything(), sum)): could not find function "summarise"</span></div><div class='input'>
+
+
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
