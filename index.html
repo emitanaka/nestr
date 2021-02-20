@@ -120,21 +120,50 @@
 <h2 class="hasAnchor">
 <a href="#amplify" class="anchor"></a><code>amplify</code>
 </h2>
-<p><strong>Needs fixing</strong></p>
 <p>The <code>dplyr::mutate</code> function modifies, creates or deletes columns but doesn’t alter the number of rows. The <code><a href="reference/amplify.html">nestr::amplify</a></code> function can create new columns which generally increase (or amplify) the size of the row dimension. The columns that were amplified as a result of the created column will be duplicated. If you are familiar with gene replication process then you can recall these functions in those terms. An amplified gene is just a duplication of the original. A mutated gene modifies the original state.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="co"># needs fixing</span>
-<span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>person <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">country</span>, 
-                            <span class="st">"AU"</span> <span class="op">~</span> <span class="fl">20</span>,
-                            <span class="st">"NZ"</span> <span class="op">~</span> <span class="fl">10</span>,
-                               <span class="va">.</span> <span class="op">~</span> <span class="fl">100</span><span class="op">)</span>,
-          child <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">person</span>, 
-                          <span class="fl">1</span><span class="op">:</span><span class="fl">10</span> <span class="op">~</span> <span class="fl">3</span>,
-                             <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span>
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>soil <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">country</span>, 
+                            <span class="st">"AU"</span> <span class="op">~</span> <span class="fl">10</span>,
+                            <span class="st">"NZ"</span> <span class="op">~</span> <span class="fl">8</span>,
+                               <span class="va">.</span> <span class="op">~</span> <span class="fl">5</span>,
+                           prefix <span class="op">=</span> <span class="st">"sample"</span>,
+                           leading0 <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span>,
+          rep <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">soil</span>, 
+                          <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># first 3 samples have 3 technical rep</span>
+                            <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># remaining have two rep</span>
 
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">country</span>, <span class="va">df</span><span class="op">$</span><span class="va">person</span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">person</span>, <span class="va">df</span><span class="op">$</span><span class="va">child</span><span class="op">)</span></code></pre></div>
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 81 x 3</span>
+<span class="co">#&gt;    country soil     rep  </span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;</span>
+<span class="co">#&gt;  1 AU      sample01 1    </span>
+<span class="co">#&gt;  2 AU      sample01 2    </span>
+<span class="co">#&gt;  3 AU      sample01 3    </span>
+<span class="co">#&gt;  4 NZ      sample01 1    </span>
+<span class="co">#&gt;  5 NZ      sample01 2    </span>
+<span class="co">#&gt;  6 NZ      sample01 3    </span>
+<span class="co">#&gt;  7 CHN     sample01 1    </span>
+<span class="co">#&gt;  8 CHN     sample01 2    </span>
+<span class="co">#&gt;  9 CHN     sample01 3    </span>
+<span class="co">#&gt; 10 USA     sample01 1    </span>
+<span class="co">#&gt; # … with 71 more rows</span>
+
+<span class="fu"><a href="https://rdrr.io/r/base/table.html">table</a></span><span class="op">(</span><span class="va">df</span><span class="op">$</span><span class="va">country</span>, <span class="va">df</span><span class="op">$</span><span class="va">soil</span><span class="op">)</span>
+<span class="co">#&gt;      </span>
+<span class="co">#&gt;       sample01 sample02 sample03 sample04 sample05 sample06 sample07 sample08</span>
+<span class="co">#&gt;   AU         3        3        3        2        2        2        2        2</span>
+<span class="co">#&gt;   CHN        3        3        3        2        2        0        0        0</span>
+<span class="co">#&gt;   JPN        3        3        3        2        2        0        0        0</span>
+<span class="co">#&gt;   NZ         3        3        3        2        2        2        2        2</span>
+<span class="co">#&gt;   USA        3        3        3        2        2        0        0        0</span>
+<span class="co">#&gt;      </span>
+<span class="co">#&gt;       sample09 sample10</span>
+<span class="co">#&gt;   AU         2        2</span>
+<span class="co">#&gt;   CHN        0        0</span>
+<span class="co">#&gt;   JPN        0        0</span>
+<span class="co">#&gt;   NZ         0        0</span>
+<span class="co">#&gt;   USA        0        0</span></code></pre></div>
 </div>
 <div id="tidyverse" class="section level2">
 <h2 class="hasAnchor">
@@ -160,27 +189,27 @@
 <p>The semantics are less direct, however and chaining of nesting structure is cumbersome. For example, see the country example below.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">mutate</span><span class="op">(</span>person <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">country</span><span class="op">==</span><span class="st">"AU"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">20</span><span class="op">)</span>,
-                            <span class="va">country</span><span class="op">==</span><span class="st">"NZ"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span>,
-                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">100</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">person</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">mutate</span><span class="op">(</span>child <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">person</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/unique.html">unique</a></span><span class="op">(</span><span class="va">person</span><span class="op">)</span><span class="op">[</span><span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">]</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
+  <span class="fu">mutate</span><span class="op">(</span>soil <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">country</span><span class="op">==</span><span class="st">"AU"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
+                          <span class="va">country</span><span class="op">==</span><span class="st">"NZ"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>,
+                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">soil</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu">mutate</span><span class="op">(</span>rep <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">soil</span> <span class="op">%in%</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sample01"</span>, <span class="st">"sample02"</span>, <span class="st">"sample03"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
                            <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
-  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">child</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 710 x 3</span>
-<span class="co">#&gt;    country person child</span>
-<span class="co">#&gt;    &lt;chr&gt;    &lt;int&gt; &lt;int&gt;</span>
-<span class="co">#&gt;  1 AU           1     1</span>
-<span class="co">#&gt;  2 AU           1     2</span>
-<span class="co">#&gt;  3 AU           1     3</span>
-<span class="co">#&gt;  4 AU           2     1</span>
-<span class="co">#&gt;  5 AU           2     2</span>
-<span class="co">#&gt;  6 AU           2     3</span>
-<span class="co">#&gt;  7 AU           3     1</span>
-<span class="co">#&gt;  8 AU           3     2</span>
-<span class="co">#&gt;  9 AU           3     3</span>
-<span class="co">#&gt; 10 AU           4     1</span>
-<span class="co">#&gt; # … with 700 more rows</span></code></pre></div>
+  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">rep</span><span class="op">)</span>
+<span class="co">#&gt; # A tibble: 81 x 3</span>
+<span class="co">#&gt;    country soil       rep</span>
+<span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;</span>
+<span class="co">#&gt;  1 AU      sample01     1</span>
+<span class="co">#&gt;  2 AU      sample01     2</span>
+<span class="co">#&gt;  3 AU      sample01     3</span>
+<span class="co">#&gt;  4 AU      sample02     1</span>
+<span class="co">#&gt;  5 AU      sample02     2</span>
+<span class="co">#&gt;  6 AU      sample02     3</span>
+<span class="co">#&gt;  7 AU      sample03     1</span>
+<span class="co">#&gt;  8 AU      sample03     2</span>
+<span class="co">#&gt;  9 AU      sample03     3</span>
+<span class="co">#&gt; 10 AU      sample04     1</span>
+<span class="co">#&gt; # … with 71 more rows</span></code></pre></div>
 <p>The intent I think is more clear from the above <code>amplify</code> example.</p>
 </div>
 </div>

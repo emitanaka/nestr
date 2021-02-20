@@ -123,7 +123,8 @@ giving the number of levels. (This will change shortly).</p>
   suffix <span class='op'>=</span> <span class='cn'>NULL</span>,
   distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
   leading0 <span class='op'>=</span> <span class='cn'>FALSE</span>,
-  compact <span class='op'>=</span> <span class='cn'>FALSE</span>
+  compact <span class='op'>=</span> <span class='cn'>TRUE</span>,
+  keyname <span class='op'>=</span> <span class='cn'>NULL</span>
 <span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
@@ -173,6 +174,11 @@ that the minimum number is met.</p></td>
 should be a compact representation or not. Ignored if distinct is <code>TRUE</code>
 since it's not possible to make compact representation if unit labels
 are all distinct.</p></td>
+    </tr>
+    <tr>
+      <th>keyname</th>
+      <td><p>The name of the parent variable. It's usually the key
+that connects the output to another table.</p></td>
     </tr>
     </table>
 
