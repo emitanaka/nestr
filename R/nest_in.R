@@ -5,7 +5,7 @@
 #' Currently only one parent is supported and child is only specified by
 #' giving the number of levels. (This will change shortly).
 #'
-#' @param .x A vector where each entry is a parent.
+#' @param x A vector where each entry is a parent.
 #' @param ... A single integer or sequence of two-sided formula. If a
 #'  single integer then each parent will have children specified by that
 #'  integer. If it is sequence of two-sided formula, then the left hand
@@ -16,10 +16,6 @@
 #'  The right hand side (RHS) only supports numbers at the moment and
 #'  corresponds to the number of children for the parental levels specified
 #'  on LHS of the corresponding formula.
-#' @param name The name of the child variable.
-#' @param name_parent The name of the parent variable. If the parent
-#'  was parsed as an assigned object then the name of the object is
-#'  taken as the name unless `name_parent` is specified.
 #' @param prefix The prefix for the child labels.
 #' @param suffix The suffix for the child labels.
 #' @param leading0 By default it is `FALSE`. If `TRUE`, this is the
@@ -27,23 +23,19 @@
 #'  specified then it corresponds to the minimum number of digits
 #'  for the child labels and there will be leading zeros augmented so
 #'  that the minimum number is met.
-#' @param unique A logical value to indicate whether the child labels
-#'  across parents should be unique.
+#' @param distinct A logical value to indicate whether the child labels
+#'  across parents should be distinct.
+#' @param compact A logical value to indicate whether the returned list
+#'  should be a compact representation or not. Ignored if distinct is `TRUE`
+#'  since it's not possible to make compact representation if unit labels
+#'  are all distinct.
 #'
-#' @return A two column data frame with the first column corresponding to
-#'  parental levels and the second column corresponding to the child levels.
+#' @return A list with the first entry corresponding to
+#'  parental levels and the second entry corresponding to the child levels.
 #'
 #' @examples
 #' # Each element in the supplied the vector has 4 child.
 #' nest_in(1:3, 4)
-#'
-#' # if an object pointing to the vector is supplied then the
-#' # name of the object is used as a column name instead
-#' first_name <- c("Tom", "Helen")
-#' nest_in(first_name, 4)
-#'
-#' # the variable name for parent and child can be overwritten
-#' nest_in(first_name, 4, name = "pet", name_parent = "person")
 #'
 #' # prefix and suffix can be added to child labels
 #' # along with other aesthesitics like leading zeroes
@@ -67,14 +59,12 @@
 #'                  "C" ~ 3)
 #'
 #' @export
-nest_in <- function(.x, ..., name = "child",
-                    name_parent = NULL,
+nest_in <- function(x, ...,
                     prefix = NULL, suffix = NULL,
-                    unique = FALSE, leading0 = FALSE) {
-  x_name <- name_parent %||%
-    tryCatch(as_string(enexpr(.x)), error = function(x) "parent")
+                    distinct = FALSE, leading0 = FALSE,
+                    compact = FALSE) {
   dots <- enquos(...)
-  levels <- as.character(unique(.x))
+  levels <- as.character(unique(x))
   levels_left <- levels
   prefix <- prefix %||% ""
   suffix <- suffix %||% ""
@@ -107,17 +97,22 @@ nest_in <- function(.x, ..., name = "child",
     }
   }
   names(reps) <- levels
-  out <- list()
-  out[[x_name]] <- rep(.x, times = reps[as.character(.x)])
 
-  if(unique) {
-    out[[name]] <- make_labels(leading0, sum(reps), prefix, suffix)
+  if(distinct) {
+      out <- split(make_labels(leading0, sum(reps), prefix, suffix),
+                   rep(levels, reps))
   } else {
     labels <- make_labels(leading0, max(reps), prefix, suffix)
-    out[[name]] <- unlist(lapply(reps[as.character(.x)], function(n) labels[1:n]))
+    if(compact) {
+      out <- lapply(reps, function(n) labels[1:n])
+      names(out) <- levels
+      attr(out, "order") <- match(x, levels)
+      class(out) <- c("clist", class(out))
+    } else {
+      out <- lapply(reps[as.character(x)], function(n) labels[1:n])
+      names(out) <- as.character(x)
+    }
   }
-  out <- as.data.frame(out)
-  rownames(out) <- NULL
   out
 }
 
