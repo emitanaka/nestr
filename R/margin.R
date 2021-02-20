@@ -1,10 +1,10 @@
 #' Calculate margin statistics
 #'
-#' @param x
-#' @param f A function to evaluate for the given group.
-#' @param group_by The indexing group for `f`.
+#' @param .x A vector.
+#' @param .f A function to evaluate for the given group.
+#' @param .group_by The indexing group for `.f`.
 #' @return A named list where name corresponds to group levels and
-#' entries to the results of `f`.
+#' entries to the results of `.f`.
 #'
 #'
 #' @examples
