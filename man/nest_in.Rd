@@ -5,18 +5,17 @@
 \title{Create a nested structure}
 \usage{
 nest_in(
-  .x,
+  x,
   ...,
-  name = "child",
-  name_parent = NULL,
   prefix = NULL,
   suffix = NULL,
-  unique = FALSE,
-  leading0 = FALSE
+  distinct = FALSE,
+  leading0 = FALSE,
+  compact = FALSE
 )
 }
 \arguments{
-\item{.x}{A vector where each entry is a parent.}
+\item{x}{A vector where each entry is a parent.}
 
 \item{...}{A single integer or sequence of two-sided formula. If a
 single integer then each parent will have children specified by that
@@ -29,28 +28,27 @@ The right hand side (RHS) only supports numbers at the moment and
 corresponds to the number of children for the parental levels specified
 on LHS of the corresponding formula.}
 
-\item{name}{The name of the child variable.}
-
-\item{name_parent}{The name of the parent variable. If the parent
-was parsed as an assigned object then the name of the object is
-taken as the name unless \code{name_parent} is specified.}
-
 \item{prefix}{The prefix for the child labels.}
 
 \item{suffix}{The suffix for the child labels.}
 
-\item{unique}{A logical value to indicate whether the child labels
-across parents should be unique.}
+\item{distinct}{A logical value to indicate whether the child labels
+across parents should be distinct.}
 
 \item{leading0}{By default it is \code{FALSE}. If \code{TRUE}, this is the
 same as setting \code{0} or \code{1}. If a positive integer is
 specified then it corresponds to the minimum number of digits
 for the child labels and there will be leading zeros augmented so
 that the minimum number is met.}
+
+\item{compact}{A logical value to indicate whether the returned list
+should be a compact representation or not. Ignored if distinct is \code{TRUE}
+since it's not possible to make compact representation if unit labels
+are all distinct.}
 }
 \value{
-A two column data frame with the first column corresponding to
-parental levels and the second column corresponding to the child levels.
+A list with the first entry corresponding to
+parental levels and the second entry corresponding to the child levels.
 }
 \description{
 This function results in a two column data frame with nested structure.
@@ -60,14 +58,6 @@ giving the number of levels. (This will change shortly).
 \examples{
 # Each element in the supplied the vector has 4 child.
 nest_in(1:3, 4)
-
-# if an object pointing to the vector is supplied then the
-# name of the object is used as a column name instead
-first_name <- c("Tom", "Helen")
-nest_in(first_name, 4)
-
-# the variable name for parent and child can be overwritten
-nest_in(first_name, 4, name = "pet", name_parent = "person")
 
 # prefix and suffix can be added to child labels
 # along with other aesthesitics like leading zeroes

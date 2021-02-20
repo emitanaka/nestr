@@ -2,56 +2,74 @@ test_that("nesting", {
   expect_equal(nest_in(1:3,
                        1 ~ 3,
                        . ~ 2),
-               data.frame(parent = rep(1:3, c(3, 2, 2)),
-                          child = as.character(c(1, 2, 3, 1, 2, 1, 2))))
+               list(`1` = as.character(1:3),
+                    `2` = as.character(1:2),
+                    `3` = as.character(1:2)))
+
+  expect_equal(nest_in(c(1:3, 2:3),
+                       1 ~ 3,
+                       . ~ 2),
+               list(`1` = as.character(1:3),
+                    `2` = as.character(1:2),
+                    `3` = as.character(1:2),
+                    `2` = as.character(1:2),
+                    `3` = as.character(1:2)))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 3,
                        . ~ 2),
-               data.frame(parent = rep(c("A", "B", "C"), c(3, 2, 2)),
-                          child = as.character(c(1, 2, 3, 1, 2, 1, 2))))
+               list(A = as.character(1:3),
+                    B = as.character(1:2),
+                    C = as.character(1:2)
+               ))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        "B" ~ 3,
                        . ~ 2),
-               data.frame(parent = rep(c("A", "B", "C"), c(2, 3, 2)),
-                          child = as.character(c(1, 2, 1, 2, 3, 1, 2))))
+               list(A = as.character(1:2),
+                    B = as.character(1:3),
+                    C = as.character(1:2)
+               ))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
                        . ~ 2),
-               data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
-                          child = as.character(c(1:10, 1, 2, 1, 2))))
+               list(A = as.character(1:10),
+                    B = as.character(1:2),
+                    C = as.character(1:2)
+               ))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
                        . ~ 2, leading0 = TRUE),
-               data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
-                          child = sprintf("%.2d", c(1:10, 1, 2, 1, 2))))
+               list(A = sprintf("%.2d", c(1:10)),
+                    B = sprintf("%.2d", c(1:2)),
+                    C = sprintf("%.2d", c(1:2))
+               ))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
                        . ~ 2, leading0 = 4),
-               data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
-                          child = sprintf("%.4d", c(1:10, 1, 2, 1, 2))))
+               list(A = sprintf("%.4d", c(1:10)),
+                    B = sprintf("%.4d", c(1:2)),
+                    C = sprintf("%.4d", c(1:2))
+               ))
 
   expect_equal(nest_in(c("A", "B", "C"),
                        1 ~ 10,
                        . ~ 2, leading0 = 4,
                        suffix = "test", prefix = "pre"),
-               data.frame(parent = rep(c("A", "B", "C"), c(10, 2, 2)),
-                          child = sprintf("pre%.4dtest", c(1:10, 1, 2, 1, 2))))
-
-  expect_equal(nest_in(c("A", "B", "C"),
-                       1 ~ 10, prefix = "student",
-                       . ~ 2, name = "student", name_parent = "class"),
-               data.frame(class = rep(c("A", "B", "C"), c(10, 2, 2)),
-                          student = sprintf("student%d", c(1:10, 1, 2, 1, 2))))
+               list(A = sprintf("pre%.4dtest", c(1:10)),
+                    B = sprintf("pre%.4dtest", c(1:2)),
+                    C = sprintf("pre%.4dtest", c(1:2))
+               ))
 
   expect_equal(nest_in(2:4,
                        1 ~ 3,
                        2 ~ 4,
                        3 ~ 2),
-               data.frame(parent = rep(2:4, times = c(3, 4, 2)),
-                          child = as.character(c(1:3, 1:4, 1:2))))
+               list(`2` = as.character(1:3),
+                    `3` = as.character(1:4),
+                    `4` = as.character(1:2))
+               )
 })
