@@ -76,6 +76,15 @@ tibble::as_tibble(df)
 table(df$country, df$soil)
 ```
 
+I don't really think this is good practice, but you can amplify rows by appending margins:
+
+```{r}
+PlantGrowth %>% 
+  amplify(weight = margin_with(weight, sum, .group_by = group)) %>% 
+  tail(10)
+```
+
+
 
 ## `tidyverse`
 

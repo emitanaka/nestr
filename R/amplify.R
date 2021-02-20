@@ -43,12 +43,19 @@ amplify_data <- function(.data, ...) {
     res <- eval_tidy(dots[[i]], new_data)
     not_named <- (is.null(dots_names) || dots_names[i] == "")
     name <- if (not_named) auto_named_dots[i] else dots_names[i]
+    current_names <- colnames(new_data)
     keydf <- key_data_frame(res, name)
-    column_order <- c(colnames(new_data), name)
-    # merge seems to move the "by" variable to first column
-    new_data <- merge(new_data, keydf, by = attr(res, "keyname"),
-                      sort = FALSE, all.x = TRUE)
-    new_data <- new_data[column_order]
+    # if name already exists, then append
+    if(name %in% current_names) {
+      keydf[setdiff(current_names, names(keydf))] <- NA
+      new_data <- rbind(new_data, keydf)
+    } else {
+      column_order <- c(current_names, name)
+      # merge seems to move the "by" variable to first column
+      new_data <- merge(new_data, keydf, by = attr(res, "keyname"),
+                        sort = FALSE, all.x = TRUE)
+      new_data <- new_data[column_order]
+    }
   }
   new_data
 }

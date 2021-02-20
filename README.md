@@ -134,6 +134,26 @@ table(df$country, df$soil)
 #>   USA        0        0
 ```
 
+I don’t really think this is good practice, but you can amplify rows by
+appending margins:
+
+``` r
+PlantGrowth %>% 
+  amplify(weight = margin_with(weight, sum, .group_by = group)) %>% 
+  tail(10)
+#>    weight group
+#> 24   5.50  trt2
+#> 25   5.37  trt2
+#> 26   5.29  trt2
+#> 27   4.92  trt2
+#> 28   6.15  trt2
+#> 29   5.80  trt2
+#> 30   5.26  trt2
+#> 31  50.32  ctrl
+#> 32  46.61  trt1
+#> 33  55.26  trt2
+```
+
 ## `tidyverse`
 
 For those who want to stay within the tidyverse framework, this is in
