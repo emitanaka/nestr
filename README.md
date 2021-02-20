@@ -24,11 +24,17 @@ The syntax proves useful in situations where the child units are
 unbalanced across the parental levels.
 
 ``` r
-nest_in(1:3, # parental vector
+nest_in(c(1:3, 2:3), # parental vector
         1 ~ 3, # level 1 has 3 children
         . ~ 1) # the remaining levels have 1 child 
 #> $`1`
 #> [1] "1" "2" "3"
+#> 
+#> $`2`
+#> [1] "1"
+#> 
+#> $`3`
+#> [1] "1"
 #> 
 #> $`2`
 #> [1] "1"
