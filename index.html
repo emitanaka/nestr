@@ -73,11 +73,17 @@
 <p>The syntax of <code>nestr</code> is the similar to <code>edibble::nested_in</code> which is used within the <a href="https://edibble.emitanaka.org/reference/set_units.html"><code>edibble::set_units</code></a> to construct nested (or hierarchical) structures.</p>
 <p>The syntax proves useful in situations where the child units are unbalanced across the parental levels.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="co"># parental vector</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="fl">2</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="fl">1</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 1 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
 <span class="co">#&gt; $`1`</span>
 <span class="co">#&gt; [1] "1" "2" "3"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`2`</span>
+<span class="co">#&gt; [1] "1"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`3`</span>
+<span class="co">#&gt; [1] "1"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $`2`</span>
 <span class="co">#&gt; [1] "1"</span>
