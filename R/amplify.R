@@ -43,9 +43,25 @@ amplify_data <- function(.data, ...) {
     res <- eval_tidy(dots[[i]], new_data)
     not_named <- (is.null(dots_names) || dots_names[i] == "")
     name <- if (not_named) auto_named_dots[i] else dots_names[i]
-    names(res)[2] <- name
-    new_data <- merge(new_data, res, by = names(res)[1])
+    keydf <- key_data_frame(res, name)
+    column_order <- c(colnames(new_data), name)
+    # merge seems to move the "by" variable to first column
+    new_data <- merge(new_data, keydf, by = attr(res, "keyname"),
+                      sort = FALSE, all.x = TRUE)
+    new_data <- new_data[column_order]
   }
   new_data
 }
 
+key_data_frame <- function(x, ...) {
+  UseMethod("key_data_frame")
+}
+
+key_data_frame.list <- function(x, name, ...) {
+  keyvals <- names(x)
+  keyname <- attr(x, "keyname")
+  out <- list()
+  out[[keyname]] <- rep(keyvals, sapply(unclass(x), length))
+  out[[name]] <- unname(unlist(x))
+  as.data.frame(out)
+}
