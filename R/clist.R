@@ -15,6 +15,11 @@ print.clist <- function(x, ...) {
 }
 
 #' @export
+str.clist <- function(x, ...) {
+  str(format(x), ...)
+}
+
+#' @export
 `[.clist` <- function(x, i, ...) {
   iorder <- attr(x, "order")[i]
   format(x, dict = TRUE)[iorder]
