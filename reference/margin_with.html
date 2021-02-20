@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Function reference • nestr</title>
+<title>Calculate margin statistics — margin_with • nestr</title>
 
 
 <!-- jquery -->
@@ -39,7 +39,8 @@
 
 
 
-<meta property="og:title" content="Function reference" />
+<meta property="og:title" content="Calculate margin statistics — margin_with" />
+<meta property="og:description" content="Calculate margin statistics" />
 
 
 
@@ -58,7 +59,7 @@
   </head>
 
   <body data-spy="scroll" data-target="#toc">
-    <div class="container template-reference-index">
+    <div class="container template-reference-topic">
       <header>
       <div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -100,54 +101,51 @@
       </header>
 
 <div class="row">
-  <div class="contents col-md-9">
+  <div class="col-md-9 contents">
     <div class="page-header">
-      <h1>Reference</h1>
+    <h1>Calculate margin statistics</h1>
+    
+    <div class="hidden name"><code>margin_with.Rd</code></div>
     </div>
 
-    <table class="ref-index">
+    <div class="ref-description">
+    <p>Calculate margin statistics</p>
+    </div>
 
-    <colgroup>
-      
-      <col class="alias" />
-      <col class="title" />
-    </colgroup>
+    <pre class="usage"><span class='fu'>margin_with</span><span class='op'>(</span><span class='va'>.x</span>, <span class='va'>.f</span>, <span class='va'>...</span>, .group_by <span class='op'>=</span> <span class='cn'>NULL</span>, .keyname <span class='op'>=</span> <span class='cn'>NULL</span><span class='op'>)</span></pre>
 
-    <tbody>
-      <tr>
-        <th colspan="2">
-          <h2 id="section-all-functions" class="hasAnchor"><a href="#section-all-functions" class="anchor"></a>All functions</h2>
-          <p class="section-desc"></p>
-        </th>
-      </tr>
-      
-      
-    </tbody><tbody>
-      
-      
-      <tr>
-        
-        <td>
-          <p><code><a href="amplify.html">amplify()</a></code> </p>
-        </td>
-        <td><p>Create or modify a column with nesting structure</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="margin_with.html">margin_with()</a></code> </p>
-        </td>
-        <td><p>Calculate margin statistics</p></td>
-      </tr><tr>
-        
-        <td>
-          <p><code><a href="nest_in.html">nest_in()</a></code> </p>
-        </td>
-        <td><p>Create a nested structure</p></td>
-      </tr>
-    </tbody>
+    <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
+    <table class="ref-arguments">
+    <colgroup><col class="name" /><col class="desc" /></colgroup>
+    <tr>
+      <th>f</th>
+      <td><p>A function to evaluate for the given group.</p></td>
+    </tr>
+    <tr>
+      <th>group_by</th>
+      <td><p>The indexing group for <code>f</code>.</p></td>
+    </tr>
     </table>
-  </div>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
+
+    <p>A named list where name corresponds to group levels and
+entries to the results of <code>f</code>.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='fu'><a href='https://rdrr.io/r/base/with.html'>with</a></span><span class='op'>(</span><span class='va'>PlantGrowth</span>, <span class='fu'>margin_with</span><span class='op'>(</span><span class='va'>weight</span>, <span class='va'>sum</span>, .group_by <span class='op'>=</span> <span class='va'>group</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt; $ctrl
+#&gt; [1] 50.32
+#&gt; 
+#&gt; $trt1
+#&gt; [1] 46.61
+#&gt; 
+#&gt; $trt2
+#&gt; [1] 55.26
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "group"</div></pre>
+  </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
       <h2 data-toc-skip>Contents</h2>

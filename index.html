@@ -164,13 +164,29 @@
 <span class="co">#&gt;   JPN        0        0</span>
 <span class="co">#&gt;   NZ         0        0</span>
 <span class="co">#&gt;   USA        0        0</span></code></pre></div>
+<p>I don’t really think this is good practice, but you can amplify rows by appending margins:</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="va">PlantGrowth</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>weight <span class="op">=</span> <span class="fu"><a href="reference/margin_with.html">margin_with</a></span><span class="op">(</span><span class="va">weight</span>, <span class="va">sum</span>, .group_by <span class="op">=</span> <span class="va">group</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
+  <span class="fu"><a href="https://rdrr.io/r/utils/head.html">tail</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>
+<span class="co">#&gt;    weight group</span>
+<span class="co">#&gt; 24   5.50  trt2</span>
+<span class="co">#&gt; 25   5.37  trt2</span>
+<span class="co">#&gt; 26   5.29  trt2</span>
+<span class="co">#&gt; 27   4.92  trt2</span>
+<span class="co">#&gt; 28   6.15  trt2</span>
+<span class="co">#&gt; 29   5.80  trt2</span>
+<span class="co">#&gt; 30   5.26  trt2</span>
+<span class="co">#&gt; 31  50.32  ctrl</span>
+<span class="co">#&gt; 32  46.61  trt1</span>
+<span class="co">#&gt; 33  55.26  trt2</span></code></pre></div>
 </div>
 <div id="tidyverse" class="section level2">
 <h2 class="hasAnchor">
 <a href="#tidyverse" class="anchor"></a><code>tidyverse</code>
 </h2>
 <p>For those who want to stay within the tidyverse framework, this is in fact doable just using <code>dplyr</code> and <code>tidyr</code>.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tidyverse</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>parent <span class="op">=</span> <span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>child <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">parent</span><span class="op">==</span><span class="fl">1</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
@@ -187,7 +203,7 @@
 <span class="co">#&gt; 6      3     1</span>
 <span class="co">#&gt; 7      3     2</span></code></pre></div>
 <p>The semantics are less direct, however and chaining of nesting structure is cumbersome. For example, see the country example below.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu">mutate</span><span class="op">(</span>soil <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">country</span><span class="op">==</span><span class="st">"AU"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
                           <span class="va">country</span><span class="op">==</span><span class="st">"NZ"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>,
