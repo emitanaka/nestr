@@ -76,52 +76,39 @@
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span>, <span class="co"># parental vector</span>
         <span class="fl">1</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 1 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
-<span class="co">#&gt;   parent child</span>
-<span class="co">#&gt; 1      1     1</span>
-<span class="co">#&gt; 2      1     2</span>
-<span class="co">#&gt; 3      1     3</span>
-<span class="co">#&gt; 4      2     1</span>
-<span class="co">#&gt; 5      3     1</span></code></pre></div>
+<span class="co">#&gt; $`1`</span>
+<span class="co">#&gt; [1] "1" "2" "3"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`2`</span>
+<span class="co">#&gt; [1] "1"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $`3`</span>
+<span class="co">#&gt; [1] "1"</span></code></pre></div>
 <p>Unlike <code>edibble::nested_in</code>, the <code><a href="reference/nest_in.html">nestr::nest_in</a></code> returns a data frame. You may also notice that the name of the function is different although both share similar syntax. One way to remember the differences in function name is that <code>nest</code><strong><code>ed</code></strong><code>_in</code> is for <code>edibble</code> and is meant for construction of the experimental design. When the verb is written in present tense (i.e. <code>nest_in</code>), it’s part of <code>nestr</code> and your focus is to create a structure in the present.</p>
 <p>A more interesing example.</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">farmer</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"John"</span>, <span class="st">"Jane"</span>, <span class="st">"Ann"</span>, <span class="st">"Thomas"</span>, <span class="st">"Helen"</span><span class="op">)</span>
-<span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">farmer</span>, 
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"John"</span>, <span class="st">"Jane"</span>, <span class="st">"Ann"</span>, <span class="st">"Thomas"</span>, <span class="st">"Helen"</span><span class="op">)</span>, 
                <span class="st">"John"</span> <span class="op">~</span> <span class="fl">2</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Ann"</span>, <span class="st">"Helen"</span><span class="op">)</span> <span class="op">~</span> <span class="fl">10</span>,
                     <span class="va">.</span> <span class="op">~</span> <span class="fl">3</span>,
-        name <span class="op">=</span> <span class="st">"chick"</span>,
         prefix <span class="op">=</span> <span class="st">"chick-"</span>,
         leading0 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
-<span class="co">#&gt;    farmer      chick</span>
-<span class="co">#&gt; 1    John chick-0001</span>
-<span class="co">#&gt; 2    John chick-0002</span>
-<span class="co">#&gt; 3    Jane chick-0001</span>
-<span class="co">#&gt; 4    Jane chick-0002</span>
-<span class="co">#&gt; 5    Jane chick-0003</span>
-<span class="co">#&gt; 6     Ann chick-0001</span>
-<span class="co">#&gt; 7     Ann chick-0002</span>
-<span class="co">#&gt; 8     Ann chick-0003</span>
-<span class="co">#&gt; 9     Ann chick-0004</span>
-<span class="co">#&gt; 10    Ann chick-0005</span>
-<span class="co">#&gt; 11    Ann chick-0006</span>
-<span class="co">#&gt; 12    Ann chick-0007</span>
-<span class="co">#&gt; 13    Ann chick-0008</span>
-<span class="co">#&gt; 14    Ann chick-0009</span>
-<span class="co">#&gt; 15    Ann chick-0010</span>
-<span class="co">#&gt; 16 Thomas chick-0001</span>
-<span class="co">#&gt; 17 Thomas chick-0002</span>
-<span class="co">#&gt; 18 Thomas chick-0003</span>
-<span class="co">#&gt; 19  Helen chick-0001</span>
-<span class="co">#&gt; 20  Helen chick-0002</span>
-<span class="co">#&gt; 21  Helen chick-0003</span>
-<span class="co">#&gt; 22  Helen chick-0004</span>
-<span class="co">#&gt; 23  Helen chick-0005</span>
-<span class="co">#&gt; 24  Helen chick-0006</span>
-<span class="co">#&gt; 25  Helen chick-0007</span>
-<span class="co">#&gt; 26  Helen chick-0008</span>
-<span class="co">#&gt; 27  Helen chick-0009</span>
-<span class="co">#&gt; 28  Helen chick-0010</span></code></pre></div>
+<span class="co">#&gt; $John</span>
+<span class="co">#&gt; [1] "chick-0001" "chick-0002"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $Jane</span>
+<span class="co">#&gt; [1] "chick-0001" "chick-0002" "chick-0003"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $Ann</span>
+<span class="co">#&gt;  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"</span>
+<span class="co">#&gt;  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $Thomas</span>
+<span class="co">#&gt; [1] "chick-0001" "chick-0002" "chick-0003"</span>
+<span class="co">#&gt; </span>
+<span class="co">#&gt; $Helen</span>
+<span class="co">#&gt;  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"</span>
+<span class="co">#&gt;  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"</span></code></pre></div>
 </div>
 <div id="amplify" class="section level2">
 <h2 class="hasAnchor">
