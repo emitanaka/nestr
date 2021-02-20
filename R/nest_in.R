@@ -29,6 +29,8 @@
 #'  should be a compact representation or not. Ignored if distinct is `TRUE`
 #'  since it's not possible to make compact representation if unit labels
 #'  are all distinct.
+#' @param keyname The name of the parent variable. It's usually the key
+#' that connects the output to another table.
 #'
 #' @return A list with the first entry corresponding to
 #'  parental levels and the second entry corresponding to the child levels.
@@ -62,7 +64,10 @@
 nest_in <- function(x, ...,
                     prefix = NULL, suffix = NULL,
                     distinct = FALSE, leading0 = FALSE,
-                    compact = FALSE) {
+                    compact = FALSE, keyname = NULL) {
+  keyname <- keyname %||%
+    tryCatch(as_string(enexpr(x)), error = function(x) "key")
+
   dots <- enquos(...)
   levels <- as.character(unique(x))
   levels_left <- levels
@@ -113,6 +118,7 @@ nest_in <- function(x, ...,
       names(out) <- as.character(x)
     }
   }
+  attr(out, "keyname") <- keyname
   out
 }
 
