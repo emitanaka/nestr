@@ -32,8 +32,8 @@
 #' @param keyname The name of the parent variable. It's usually the key
 #' that connects the output to another table.
 #'
-#' @return A list with the first entry corresponding to
-#'  parental levels and the second entry corresponding to the child levels.
+#' @return A named list where the entry corresponding to the child levels
+#' and the names correspond to parental levels.
 #'
 #' @examples
 #' # Each element in the supplied the vector has 4 child.

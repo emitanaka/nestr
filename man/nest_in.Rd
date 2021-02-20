@@ -51,8 +51,8 @@ are all distinct.}
 that connects the output to another table.}
 }
 \value{
-A list with the first entry corresponding to
-parental levels and the second entry corresponding to the child levels.
+A named list where the entry corresponding to the child levels
+and the names correspond to parental levels.
 }
 \description{
 This function results in a two column data frame with nested structure.
