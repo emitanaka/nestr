@@ -80,8 +80,6 @@ nest_in(c("John", "Jane", "Ann", "Thomas", "Helen"),
 
 ## `amplify`
 
-**Needs fixing**
-
 The `dplyr::mutate` function modifies, creates or deletes columns but
 doesn’t alter the number of rows. The `nestr::amplify` function can
 create new columns which generally increase (or amplify) the size of the
@@ -92,18 +90,48 @@ An amplified gene is just a duplication of the original. A mutated gene
 modifies the original state.
 
 ``` r
-# needs fixing
 df <- data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>% 
-  amplify(person = nest_in(country, 
-                            "AU" ~ 20,
-                            "NZ" ~ 10,
-                               . ~ 100),
-          child = nest_in(person, 
-                          1:10 ~ 3,
-                             . ~ 2))
+  amplify(soil = nest_in(country, 
+                            "AU" ~ 10,
+                            "NZ" ~ 8,
+                               . ~ 5,
+                           prefix = "sample",
+                           leading0 = TRUE),
+          rep = nest_in(soil, 
+                          1:3 ~ 3, # first 3 samples have 3 technical rep
+                            . ~ 2)) # remaining have two rep
 
-table(df$country, df$person)
-table(df$person, df$child)
+tibble::as_tibble(df)
+#> # A tibble: 81 x 3
+#>    country soil     rep  
+#>    <chr>   <chr>    <chr>
+#>  1 AU      sample01 1    
+#>  2 AU      sample01 2    
+#>  3 AU      sample01 3    
+#>  4 NZ      sample01 1    
+#>  5 NZ      sample01 2    
+#>  6 NZ      sample01 3    
+#>  7 CHN     sample01 1    
+#>  8 CHN     sample01 2    
+#>  9 CHN     sample01 3    
+#> 10 USA     sample01 1    
+#> # … with 71 more rows
+
+table(df$country, df$soil)
+#>      
+#>       sample01 sample02 sample03 sample04 sample05 sample06 sample07 sample08
+#>   AU         3        3        3        2        2        2        2        2
+#>   CHN        3        3        3        2        2        0        0        0
+#>   JPN        3        3        3        2        2        0        0        0
+#>   NZ         3        3        3        2        2        2        2        2
+#>   USA        3        3        3        2        2        0        0        0
+#>      
+#>       sample09 sample10
+#>   AU         2        2
+#>   CHN        0        0
+#>   JPN        0        0
+#>   NZ         0        0
+#>   USA        0        0
 ```
 
 ## `tidyverse`
@@ -134,27 +162,27 @@ is cumbersome. For example, see the country example below.
 
 ``` r
 data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>% 
-  mutate(person = case_when(country=="AU" ~ list(1:20),
-                            country=="NZ" ~ list(1:10),
-                               TRUE ~ list(1:100))) %>% 
-  unnest_longer(person) %>% 
-  mutate(child = case_when(person %in% unique(person)[1:10] ~ list(1:3),
+  mutate(soil = case_when(country=="AU" ~ list(sprintf("sample%.2d", 1:10)),
+                          country=="NZ" ~ list(sprintf("sample%.2d", 1:8)),
+                               TRUE ~ list(sprintf("sample%.2d", 1:5)))) %>% 
+  unnest_longer(soil) %>% 
+  mutate(rep = case_when(soil %in% c("sample01", "sample02", "sample03") ~ list(1:3),
                            TRUE ~ list(1:2))) %>% 
-  unnest_longer(child)
-#> # A tibble: 710 x 3
-#>    country person child
-#>    <chr>    <int> <int>
-#>  1 AU           1     1
-#>  2 AU           1     2
-#>  3 AU           1     3
-#>  4 AU           2     1
-#>  5 AU           2     2
-#>  6 AU           2     3
-#>  7 AU           3     1
-#>  8 AU           3     2
-#>  9 AU           3     3
-#> 10 AU           4     1
-#> # … with 700 more rows
+  unnest_longer(rep)
+#> # A tibble: 81 x 3
+#>    country soil       rep
+#>    <chr>   <chr>    <int>
+#>  1 AU      sample01     1
+#>  2 AU      sample01     2
+#>  3 AU      sample01     3
+#>  4 AU      sample02     1
+#>  5 AU      sample02     2
+#>  6 AU      sample02     3
+#>  7 AU      sample03     1
+#>  8 AU      sample03     2
+#>  9 AU      sample03     3
+#> 10 AU      sample04     1
+#> # … with 71 more rows
 ```
 
 The intent I think is more clear from the above `amplify` example.
