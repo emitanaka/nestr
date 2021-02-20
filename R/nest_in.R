@@ -64,9 +64,9 @@
 nest_in <- function(x, ...,
                     prefix = NULL, suffix = NULL,
                     distinct = FALSE, leading0 = FALSE,
-                    compact = FALSE, keyname = NULL) {
+                    compact = TRUE, keyname = NULL) {
   keyname <- keyname %||%
-    tryCatch(as_string(enexpr(x)), error = function(x) "key")
+    tryCatch(as_string(enexpr(x)), error = function(x) NULL)
 
   dots <- enquos(...)
   levels <- as.character(unique(x))
