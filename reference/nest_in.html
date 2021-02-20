@@ -192,7 +192,9 @@ parental levels and the second entry corresponding to the child levels.</p>
 #&gt; 
 #&gt; $`3`
 #&gt; [1] "1" "2" "3" "4"
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "key"</div><div class='input'>
 <span class='co'># prefix and suffix can be added to child labels</span>
 <span class='co'># along with other aesthesitics like leading zeroes</span>
 <span class='co'># with minimum number of digits.</span>
@@ -208,7 +210,9 @@ parental levels and the second entry corresponding to the child levels.</p>
 #&gt; $`3`
 #&gt;  [1] "id-0001xy" "id-0002xy" "id-0003xy" "id-0004xy" "id-0005xy" "id-0006xy"
 #&gt;  [7] "id-0007xy" "id-0008xy" "id-0009xy" "id-0010xy"
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "key"</div><div class='input'>
 <span class='co'># you can specify unbalanced nested structures</span>
 <span class='fu'>nest_in</span><span class='op'>(</span><span class='fl'>2</span><span class='op'>:</span><span class='fl'>4</span>,
          <span class='fl'>1</span> <span class='op'>~</span> <span class='fl'>3</span>,
@@ -222,7 +226,9 @@ parental levels and the second entry corresponding to the child levels.</p>
 #&gt; 
 #&gt; $`4`
 #&gt; [1] "1" "2"
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "key"</div><div class='input'>
 <span class='co'># A `.` may be used to specify "otherwise".</span>
 <span class='fu'>nest_in</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span>, <span class='st'>"D"</span><span class='op'>)</span>,
              <span class='fl'>2</span><span class='op'>:</span><span class='fl'>3</span> <span class='op'>~</span> <span class='fl'>10</span>,
@@ -238,7 +244,9 @@ parental levels and the second entry corresponding to the child levels.</p>
 #&gt; 
 #&gt; $D
 #&gt; [1] "1" "2" "3"
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "key"</div><div class='input'>
 <span class='co'># The parental level can be referred by its name or vectorised.</span>
 <span class='fu'>nest_in</span><span class='op'>(</span><span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span>, <span class='st'>"C"</span><span class='op'>)</span>,
          <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"A"</span>, <span class='st'>"B"</span><span class='op'>)</span> <span class='op'>~</span> <span class='fl'>10</span>,
@@ -251,7 +259,9 @@ parental levels and the second entry corresponding to the child levels.</p>
 #&gt; 
 #&gt; $C
 #&gt; [1] "1" "2" "3"
-#&gt; </div><div class='input'>
+#&gt; 
+#&gt; attr(,"keyname")
+#&gt; [1] "key"</div><div class='input'>
 </div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
