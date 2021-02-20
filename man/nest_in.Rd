@@ -11,7 +11,8 @@ nest_in(
   suffix = NULL,
   distinct = FALSE,
   leading0 = FALSE,
-  compact = FALSE
+  compact = TRUE,
+  keyname = NULL
 )
 }
 \arguments{
@@ -45,6 +46,9 @@ that the minimum number is met.}
 should be a compact representation or not. Ignored if distinct is \code{TRUE}
 since it's not possible to make compact representation if unit labels
 are all distinct.}
+
+\item{keyname}{The name of the parent variable. It's usually the key
+that connects the output to another table.}
 }
 \value{
 A list with the first entry corresponding to
