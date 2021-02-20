@@ -7,13 +7,15 @@
 margin_with(.x, .f, ..., .group_by = NULL, .keyname = NULL)
 }
 \arguments{
-\item{f}{A function to evaluate for the given group.}
+\item{.x}{A vector.}
 
-\item{group_by}{The indexing group for \code{f}.}
+\item{.f}{A function to evaluate for the given group.}
+
+\item{.group_by}{The indexing group for \code{.f}.}
 }
 \value{
 A named list where name corresponds to group levels and
-entries to the results of \code{f}.
+entries to the results of \code{.f}.
 }
 \description{
 Calculate margin statistics
