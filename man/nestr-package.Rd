@@ -4,12 +4,12 @@
 \name{nestr-package}
 \alias{nestr}
 \alias{nestr-package}
-\title{nestr: Build nesting or hierarchical structures}
+\title{nestr: Build Nesting or Hierarchical Structures}
 \description{
-Tools to build nesting or hierarchical strucures.
+Facilitates building a nesting or hierarchical structure as a list or data frame by using a human friendly syntax.
 }
 \author{
-\strong{Maintainer}: Emi Tanaka \email{dr.emi.tanaka@gmail.com} (\href{https://orcid.org/0000-0002-1455-259X}{ORCID})
+\strong{Maintainer}: Emi Tanaka \email{dr.emi.tanaka@gmail.com} (\href{https://orcid.org/0000-0002-1455-259X}{ORCID}) [copyright holder]
 
 }
 \keyword{internal}
