@@ -1,6 +1,5 @@
 op.nestr <- list(
-  nestr.leading_zero = FALSE,
-  nestr.min_ndigits = 0
+  nestr.leading_zero = FALSE
 )
 
 nestr_opt <- function(x, prefix = "nestr.") {
