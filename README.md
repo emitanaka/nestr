@@ -13,70 +13,105 @@ experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](h
 library(nestr)
 ```
 
+The main purpose of `nestr` R-package is to build nested (or
+hierarchical) structures with output as a list or a data frame. The
+syntax is particularly useful when the child units are unbalanced across
+the parental levels.
+
+``` r
+nest_in(c("a", "c", "a", "b"), # parental vector
+        2 ~ 3, # level 2 has 3 children
+        . ~ 1) # the remaining levels have 1 child 
+#> $a
+#> [1] "1"
+#> 
+#> $c
+#> [1] "1"
+#> 
+#> $a
+#> [1] "1"
+#> 
+#> $b
+#> [1] "1" "2" "3"
+```
+
+The parental vector may be a factor with different ordering of the
+levels.
+
+``` r
+nest_in(factor(c("a", "c", "a", "b"), levels = c("a", "c", "b")), # parental vector
+        2 ~ 3, # level 2 has 3 children
+        . ~ 1) # the remaining levels have 1 child 
+#> $a
+#> [1] "1"
+#> 
+#> $c
+#> [1] "1" "2" "3"
+#> 
+#> $a
+#> [1] "1"
+#> 
+#> $b
+#> [1] "1"
+```
+
+Or you can refer the parental level by character.
+
+``` r
+nest_in(c("a", "c", "a", "b"), # parental vector
+        "b" ~ 3, # "b" has 3 children
+        . ~ 1) # the remaining levels have 1 child 
+#> $a
+#> [1] "1"
+#> 
+#> $c
+#> [1] "1"
+#> 
+#> $a
+#> [1] "1"
+#> 
+#> $b
+#> [1] "1" "2" "3"
+```
+
+A more interesting example.
+
+``` r
+nest_in(c("Math", "Science", "Economics", "Art"), 
+               "Science" ~ 2,
+    c("Art", "Math") ~ 10,
+                    . ~ 3,
+        prefix = "student-",
+        leading0 = 4)
+#> $Math
+#> [1] "student-0001" "student-0002" "student-0003"
+#> 
+#> $Science
+#> [1] "student-0001" "student-0002"
+#> 
+#> $Economics
+#> [1] "student-0001" "student-0002" "student-0003"
+#> 
+#> $Art
+#>  [1] "student-0001" "student-0002" "student-0003" "student-0004" "student-0005"
+#>  [6] "student-0006" "student-0007" "student-0008" "student-0009" "student-0010"
+```
+
 ## `edibble::nested_in` and `nestr::nest_in`
 
-The syntax of `nestr` is the similar to `edibble::nested_in` which is
-used within the
+The syntax of `nestr` is similar to `edibble::nested_in` which is used
+within the
 [`edibble::set_units`](https://edibble.emitanaka.org/reference/set_units.html)
 to construct nested (or hierarchical) structures.
 
-The syntax proves useful in situations where the child units are
-unbalanced across the parental levels.
-
-``` r
-nest_in(c(1:3, 2:3), # parental vector
-        1 ~ 3, # level 1 has 3 children
-        . ~ 1) # the remaining levels have 1 child 
-#> $`1`
-#> [1] "1" "2" "3"
-#> 
-#> $`2`
-#> [1] "1"
-#> 
-#> $`3`
-#> [1] "1"
-#> 
-#> $`2`
-#> [1] "1"
-#> 
-#> $`3`
-#> [1] "1"
-```
-
 Unlike `edibble::nested_in`, the `nestr::nest_in` returns a data frame.
 You may also notice that the name of the function is different although
-both share similar syntax. One way to remember the differences in
-function name is that `nest`**`ed`**`_in` is for `edibble` and is meant
-for construction of the experimental design. When the verb is written in
-present tense (i.e. `nest_in`), it’s part of `nestr` and your focus is
-to create a structure in the present.
-
-A more interesing example.
-
-``` r
-nest_in(c("John", "Jane", "Ann", "Thomas", "Helen"), 
-               "John" ~ 2,
-    c("Ann", "Helen") ~ 10,
-                    . ~ 3,
-        prefix = "chick-",
-        leading0 = 4)
-#> $John
-#> [1] "chick-0001" "chick-0002"
-#> 
-#> $Jane
-#> [1] "chick-0001" "chick-0002" "chick-0003"
-#> 
-#> $Ann
-#>  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"
-#>  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"
-#> 
-#> $Thomas
-#> [1] "chick-0001" "chick-0002" "chick-0003"
-#> 
-#> $Helen
-#>  [1] "chick-0001" "chick-0002" "chick-0003" "chick-0004" "chick-0005"
-#>  [6] "chick-0006" "chick-0007" "chick-0008" "chick-0009" "chick-0010"
-```
+both share virtually the same syntax. One way to remember the
+differences in function name is that `nested_in` is for `edibble` and is
+meant for construction of the experimental design (notice the “ed” in
+the function name). When the verb is written in present tense
+(i.e. `nest_in`), it’s part of `nestr` and your focus is to create a
+structure in the present.
 
 ## `amplify`
 
@@ -102,56 +137,20 @@ df <- data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>%
                             . ~ 2)) # remaining have two rep
 
 tibble::as_tibble(df)
-#> # A tibble: 81 x 3
+#> # A tibble: 71 x 3
 #>    country soil     rep  
 #>    <chr>   <chr>    <chr>
 #>  1 AU      sample01 1    
 #>  2 AU      sample01 2    
 #>  3 AU      sample01 3    
-#>  4 NZ      sample01 1    
-#>  5 NZ      sample01 2    
-#>  6 NZ      sample01 3    
-#>  7 CHN     sample01 1    
-#>  8 CHN     sample01 2    
-#>  9 CHN     sample01 3    
-#> 10 USA     sample01 1    
-#> # … with 71 more rows
-
-table(df$country, df$soil)
-#>      
-#>       sample01 sample02 sample03 sample04 sample05 sample06 sample07 sample08
-#>   AU         3        3        3        2        2        2        2        2
-#>   CHN        3        3        3        2        2        0        0        0
-#>   JPN        3        3        3        2        2        0        0        0
-#>   NZ         3        3        3        2        2        2        2        2
-#>   USA        3        3        3        2        2        0        0        0
-#>      
-#>       sample09 sample10
-#>   AU         2        2
-#>   CHN        0        0
-#>   JPN        0        0
-#>   NZ         0        0
-#>   USA        0        0
-```
-
-I don’t really think this is good practice, but you can amplify rows by
-appending margins:
-
-``` r
-PlantGrowth %>% 
-  amplify(weight = margin_with(weight, sum, .group_by = group)) %>% 
-  tail(10)
-#>    weight group
-#> 24   5.50  trt2
-#> 25   5.37  trt2
-#> 26   5.29  trt2
-#> 27   4.92  trt2
-#> 28   6.15  trt2
-#> 29   5.80  trt2
-#> 30   5.26  trt2
-#> 31  50.32  ctrl
-#> 32  46.61  trt1
-#> 33  55.26  trt2
+#>  4 JPN     sample01 1    
+#>  5 JPN     sample01 2    
+#>  6 JPN     sample01 3    
+#>  7 NZ      sample01 1    
+#>  8 NZ      sample01 2    
+#>  9 NZ      sample01 3    
+#> 10 CHN     sample01 1    
+#> # … with 61 more rows
 ```
 
 ## `tidyverse`
@@ -159,28 +158,13 @@ PlantGrowth %>%
 For those who want to stay within the tidyverse framework, this is in
 fact doable just using `dplyr` and `tidyr`.
 
-``` r
-library(tidyverse)
-data.frame(parent = 1:3) %>% 
-  mutate(child = case_when(parent==1 ~ list(1:3),
-                       TRUE ~ list(1:2))) %>% 
-  unnest_longer(child)
-#> # A tibble: 7 x 2
-#>   parent child
-#>    <int> <int>
-#> 1      1     1
-#> 2      1     2
-#> 3      1     3
-#> 4      2     1
-#> 5      2     2
-#> 6      3     1
-#> 7      3     2
-```
-
 The semantics are less direct, however and chaining of nesting structure
-is cumbersome. For example, see the country example below.
+is cumbersome. For example, see the equivalent example from before
+below.
 
 ``` r
+library(dplyr)
+library(tidyr)
 data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>% 
   mutate(soil = case_when(country=="AU" ~ list(sprintf("sample%.2d", 1:10)),
                           country=="NZ" ~ list(sprintf("sample%.2d", 1:8)),
@@ -205,4 +189,5 @@ data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>%
 #> # … with 71 more rows
 ```
 
-The intent I think is more clear from the above `amplify` example.
+The intent I think is more clear from the above `amplify` example. It’s
+a personal preference so use what suits your own situation\!
