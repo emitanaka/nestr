@@ -72,4 +72,32 @@ test_that("nesting", {
                     `3` = as.character(1:4),
                     `4` = as.character(1:2))
                )
+
+  expect_equal(nest_in(1:3, c("A", "B"), compact = FALSE),
+               list(`1` = c("A", "B"),
+                    `2` = c("A", "B"),
+                    `3` = c("A", "B"))
+  )
+
+  expect_equal(nest_in(1:3,
+                       1 ~ c("A", "B"),
+                       . ~ "C", compact = FALSE),
+               list(`1` = c("A", "B"),
+                    `2` = "C",
+                    `3` = "C"))
+
+  expect_equal(nest_in(1:3,
+                       2 ~ c("A", "B"),
+                       . ~ 3, compact = FALSE),
+               list(`1` = as.character(1:3),
+                    `2` = c("A", "B"),
+                    `3` = as.character(1:3)))
+
+  expect_equal(nest_in(1:3,
+                       2 ~ c("A", "B"),
+                       . ~ 3, compact = FALSE, distinct = TRUE),
+               list(`1` = as.character(1:3),
+                    `2` = c("A", "B"),
+                    `3` = as.character(4:6)))
+
 })

@@ -7,8 +7,8 @@
 nest_in(
   x,
   ...,
-  prefix = NULL,
-  suffix = NULL,
+  prefix = "",
+  suffix = "",
   distinct = FALSE,
   leading0 = FALSE,
   compact = TRUE,
@@ -16,25 +16,25 @@ nest_in(
 )
 }
 \arguments{
-\item{x}{A vector where each entry is a parent.}
+\item{x}{A vector where each entry is the level of a parent. It may
+be a factor or character. If character, levels are ordered alphanumerically.}
 
-\item{...}{A single integer or sequence of two-sided formula. If a
-single integer then each parent will have children specified by that
-integer. If it is sequence of two-sided formula, then the left hand
+\item{...}{A single integer, character vector or sequence of
+two-sided formula. If a single integer or character vector then each parent will have
+children specified by the given value. If it is sequence of two-sided formula, then the left hand
 side (LHS) specifies the level as an integer or character. E.g. \code{1}
-means the first unique entry of the parent vector. If it is a
+means the first level of the parent vector. If it is a
 character then it is assumed that it corresponds to the label of
 the parental level. Vector is supported for LHS.
-The right hand side (RHS) only supports numbers at the moment and
-corresponds to the number of children for the parental levels specified
-on LHS of the corresponding formula.}
+The right hand side (RHS) can only be an integer or a character vector.}
 
 \item{prefix}{The prefix for the child labels.}
 
 \item{suffix}{The suffix for the child labels.}
 
 \item{distinct}{A logical value to indicate whether the child labels
-across parents should be distinct.}
+across parents should be distinct. The labels are only
+distinct if the RHS of the formula is numeric.}
 
 \item{leading0}{By default it is \code{FALSE}. If \code{TRUE}, this is the
 same as setting \code{0} or \code{1}. If a positive integer is
