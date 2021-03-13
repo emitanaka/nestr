@@ -14,10 +14,9 @@ print.clist <- function(x, ...) {
   print(format(x, ...))
 }
 
-#' @export
-str.clist <- function(x, ...) {
-  str(format(x), ...)
-}
+#str.clist <- function(x, ...) {
+#  str(format(x), ...)
+#}
 
 #' @export
 `[.clist` <- function(x, i, ...) {
