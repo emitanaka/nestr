@@ -74,7 +74,7 @@ giving the number of levels. (This will change shortly)." />
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -119,8 +119,8 @@ giving the number of levels. (This will change shortly).</p>
     <pre class="usage"><span class='fu'>nest_in</span><span class='op'>(</span>
   <span class='va'>x</span>,
   <span class='va'>...</span>,
-  prefix <span class='op'>=</span> <span class='cn'>NULL</span>,
-  suffix <span class='op'>=</span> <span class='cn'>NULL</span>,
+  prefix <span class='op'>=</span> <span class='st'>""</span>,
+  suffix <span class='op'>=</span> <span class='st'>""</span>,
   distinct <span class='op'>=</span> <span class='cn'>FALSE</span>,
   leading0 <span class='op'>=</span> <span class='cn'>FALSE</span>,
   compact <span class='op'>=</span> <span class='cn'>TRUE</span>,
@@ -132,20 +132,19 @@ giving the number of levels. (This will change shortly).</p>
     <colgroup><col class="name" /><col class="desc" /></colgroup>
     <tr>
       <th>x</th>
-      <td><p>A vector where each entry is a parent.</p></td>
+      <td><p>A vector where each entry is the level of a parent. It may
+be a factor or character. If character, levels are ordered alphanumerically.</p></td>
     </tr>
     <tr>
       <th>...</th>
-      <td><p>A single integer or sequence of two-sided formula. If a
-single integer then each parent will have children specified by that
-integer. If it is sequence of two-sided formula, then the left hand
+      <td><p>A single integer, character vector or sequence of
+two-sided formula. If a single integer or character vector then each parent will have
+children specified by the given value. If it is sequence of two-sided formula, then the left hand
 side (LHS) specifies the level as an integer or character. E.g. <code>1</code>
-means the first unique entry of the parent vector. If it is a
+means the first level of the parent vector. If it is a
 character then it is assumed that it corresponds to the label of
 the parental level. Vector is supported for LHS.
-The right hand side (RHS) only supports numbers at the moment and
-corresponds to the number of children for the parental levels specified
-on LHS of the corresponding formula.</p></td>
+The right hand side (RHS) can only be an integer or a character vector.</p></td>
     </tr>
     <tr>
       <th>prefix</th>
@@ -158,7 +157,8 @@ on LHS of the corresponding formula.</p></td>
     <tr>
       <th>distinct</th>
       <td><p>A logical value to indicate whether the child labels
-across parents should be distinct.</p></td>
+across parents should be distinct. The labels are only
+distinct if the RHS of the formula is numeric.</p></td>
     </tr>
     <tr>
       <th>leading0</th>
@@ -240,7 +240,7 @@ and the names correspond to parental levels.</p>
 #&gt;  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
 #&gt; 
 #&gt; $C
-#&gt;  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
+#&gt; [1] "1" "2" "3"
 #&gt; 
 #&gt; $D
 #&gt; [1] "1" "2" "3"
@@ -253,7 +253,7 @@ and the names correspond to parental levels.</p>
 #&gt;  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
 #&gt; 
 #&gt; $B
-#&gt;  [1] "1"  "2"  "3"  "4"  "5"  "6"  "7"  "8"  "9"  "10"
+#&gt; NULL
 #&gt; 
 #&gt; $C
 #&gt; [1] "1" "2" "3"

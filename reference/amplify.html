@@ -6,7 +6,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Create or modify a column with nesting structure — amplify • nestr</title>
+<title>Amplify the data frame with a given structure — amplify • nestr</title>
 
 
 <!-- jquery -->
@@ -39,8 +39,11 @@
 
 
 
-<meta property="og:title" content="Create or modify a column with nesting structure — amplify" />
-<meta property="og:description" content="Create or modify a column with nesting structure" />
+<meta property="og:title" content="Amplify the data frame with a given structure — amplify" />
+<meta property="og:description" content="The dplyr::mutate function modifies, deletes or creates a new column for
+a data frame without altering the number of rows. The amplify function
+can create new columns which generally increase (or amplify) the size of the
+row dimension. The observations in other columns are duplicated." />
 
 
 
@@ -72,7 +75,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">nestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.0.0.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.0</span>
       </span>
     </div>
 
@@ -103,16 +106,28 @@
 <div class="row">
   <div class="col-md-9 contents">
     <div class="page-header">
-    <h1>Create or modify a column with nesting structure</h1>
+    <h1>Amplify the data frame with a given structure</h1>
     
     <div class="hidden name"><code>amplify.Rd</code></div>
     </div>
 
     <div class="ref-description">
-    <p>Create or modify a column with nesting structure</p>
+    <p>The <code>dplyr::mutate</code> function modifies, deletes or creates a new column for
+a data frame without altering the number of rows. The <code>amplify</code> function
+can create new columns which generally increase (or amplify) the size of the
+row dimension. The observations in other columns are duplicated.</p>
     </div>
 
-    <pre class="usage"><span class='fu'>amplify</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span></pre>
+    <pre class="usage"><span class='fu'>amplify</span><span class='op'>(</span><span class='va'>.data</span>, <span class='va'>...</span><span class='op'>)</span>
+
+<span class='co'># S3 method for data.frame</span>
+<span class='fu'>amplify</span><span class='op'>(</span>
+  <span class='va'>.data</span>,
+  <span class='va'>...</span>,
+  .keep <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"all"</span>, <span class='st'>"used"</span>, <span class='st'>"unused"</span>, <span class='st'>"none"</span><span class='op'>)</span>,
+  .before <span class='op'>=</span> <span class='cn'>NULL</span>,
+  .after <span class='op'>=</span> <span class='cn'>NULL</span>
+<span class='op'>)</span></pre>
 
     <h2 class="hasAnchor" id="arguments"><a class="anchor" href="#arguments"></a>Arguments</h2>
     <table class="ref-arguments">
@@ -125,9 +140,39 @@
       <th>...</th>
       <td><p>Name-value pairs.</p></td>
     </tr>
+    <tr>
+      <th>.keep, .before, .after</th>
+      <td><p>Use to control which columns are retained and how it is ordered
+in the output. See documentation of <code>dplyr::mutate</code> for more information.</p></td>
+    </tr>
     </table>
 
+    <h2 class="hasAnchor" id="value"><a class="anchor" href="#value"></a>Value</h2>
 
+    <p>Returns a data frame.</p>
+    <h2 class="hasAnchor" id="details"><a class="anchor" href="#details"></a>Details</h2>
+
+    <p>If you are familiar with gene replication process then you can recall these
+functions in genetic terms; an amplified gene is a duplication of the
+original while a mutated gene modifies the original state.</p>
+
+    <h2 class="hasAnchor" id="examples"><a class="anchor" href="#examples"></a>Examples</h2>
+    <pre class="examples"><div class='input'><span class='va'>df</span> <span class='op'>&lt;-</span> <span class='fu'><a href='https://rdrr.io/r/base/data.frame.html'>data.frame</a></span><span class='op'>(</span>x <span class='op'>=</span> <span class='fl'>1</span><span class='op'>:</span><span class='fl'>3</span>, y <span class='op'>=</span> <span class='fu'><a href='https://rdrr.io/r/base/c.html'>c</a></span><span class='op'>(</span><span class='st'>"a"</span>, <span class='st'>"b"</span>, <span class='st'>"b"</span><span class='op'>)</span><span class='op'>)</span>
+<span class='fu'>amplify</span><span class='op'>(</span><span class='va'>df</span>, z <span class='op'>=</span> <span class='fu'><a href='nest_in.html'>nest_in</a></span><span class='op'>(</span><span class='va'>y</span>, <span class='st'>"a"</span> <span class='op'>~</span> <span class='fl'>5</span>,
+                           <span class='st'>"b"</span> <span class='op'>~</span> <span class='fl'>3</span><span class='op'>)</span><span class='op'>)</span>
+</div><div class='output co'>#&gt;    x y z
+#&gt; 1  1 a 1
+#&gt; 2  1 a 2
+#&gt; 3  1 a 3
+#&gt; 4  1 a 4
+#&gt; 5  1 a 5
+#&gt; 6  2 b 1
+#&gt; 7  2 b 2
+#&gt; 8  2 b 3
+#&gt; 9  3 b 1
+#&gt; 10 3 b 2
+#&gt; 11 3 b 3</div><div class='input'>
+</div></pre>
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <nav id="toc" data-toggle="toc" class="sticky-top">
