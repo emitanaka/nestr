@@ -1,13 +1,31 @@
-#' Create or modify a column with nesting structure
+#' Amplify the data frame with a given structure
+#'
+#' The `dplyr::mutate` function modifies, deletes or creates a new column for
+#' a data frame without altering the number of rows. The `amplify` function
+#' can create new columns which generally increase (or amplify) the size of the
+#' row dimension. The observations in other columns are duplicated.
+#'
+#' If you are familiar with gene replication process then you can recall these
+#' functions in genetic terms; an amplified gene is a duplication of the
+#' original while a mutated gene modifies the original state.
 #'
 #' @param .data An object with the data.
 #' @param ... Name-value pairs.
+#'
+#' @return Returns a data frame.
+#' @examples
+#' df <- data.frame(x = 1:3, y = c("a", "b", "b"))
+#' amplify(df, z = nest_in(y, "a" ~ 5,
+#'                            "b" ~ 3))
 #'
 #' @export
 amplify <- function(.data, ...) {
   UseMethod("amplify")
 }
 
+#' @rdname amplify
+#' @param .keep,.before,.after Use to control which columns are retained and how it is ordered
+#' in the output. See documentation of `dplyr::mutate` for more information.
 #' @export
 amplify.data.frame <- function(.data, ...,
                                .keep = c("all", "used", "unused", "none"),
@@ -19,8 +37,8 @@ amplify.data.frame <- function(.data, ...,
   .before <- enquo(.before)
   .after <- enquo(.after)
   if (!quo_is_null(.before) || !quo_is_null(.after)) {
-    new <- setdiff(names(cols), names(.data))
-    out <- relocate(out, !!new, .before = !!.before, .after = !!.after)
+    new <- setdiff(names(out), names(.data))
+    out <- .relocate(out, !!new, .before = !!.before, .after = !!.after)
   }
   out
 }
@@ -60,11 +78,7 @@ amplify_data <- function(.data, ...) {
   new_data
 }
 
-key_data_frame <- function(x, ...) {
-  UseMethod("key_data_frame")
-}
-
-key_data_frame.list <- function(x, name, ...) {
+key_data_frame <- function(x, name, ...) {
   keyvals <- names(x)
   keyname <- attr(x, "keyname")
   out <- list()

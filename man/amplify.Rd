@@ -2,15 +2,44 @@
 % Please edit documentation in R/amplify.R
 \name{amplify}
 \alias{amplify}
-\title{Create or modify a column with nesting structure}
+\alias{amplify.data.frame}
+\title{Amplify the data frame with a given structure}
 \usage{
 amplify(.data, ...)
+
+\method{amplify}{data.frame}(
+  .data,
+  ...,
+  .keep = c("all", "used", "unused", "none"),
+  .before = NULL,
+  .after = NULL
+)
 }
 \arguments{
 \item{.data}{An object with the data.}
 
 \item{...}{Name-value pairs.}
+
+\item{.keep, .before, .after}{Use to control which columns are retained and how it is ordered
+in the output. See documentation of \code{dplyr::mutate} for more information.}
+}
+\value{
+Returns a data frame.
 }
 \description{
-Create or modify a column with nesting structure
+The \code{dplyr::mutate} function modifies, deletes or creates a new column for
+a data frame without altering the number of rows. The \code{amplify} function
+can create new columns which generally increase (or amplify) the size of the
+row dimension. The observations in other columns are duplicated.
+}
+\details{
+If you are familiar with gene replication process then you can recall these
+functions in genetic terms; an amplified gene is a duplication of the
+original while a mutated gene modifies the original state.
+}
+\examples{
+df <- data.frame(x = 1:3, y = c("a", "b", "b"))
+amplify(df, z = nest_in(y, "a" ~ 5,
+                           "b" ~ 3))
+
 }
