@@ -1,6 +1,6 @@
 Package: nestr
 Title: Build Nesting or Hierarchical Structures
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: 
     person(given = "Emi",
            family = "Tanaka",
