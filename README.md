@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Lifecycle:
-experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
 <!-- badges: end -->
 
 ``` r
@@ -26,13 +24,13 @@ nest_in(c("a", "c", "a", "b"), # parental vector
 #> [1] "1"
 #> 
 #> $c
-#> [1] "1"
+#> [1] "1" "2" "3"
 #> 
 #> $a
 #> [1] "1"
 #> 
 #> $b
-#> [1] "1" "2" "3"
+#> [1] "1"
 ```
 
 The parental vector may be a factor with different ordering of the
@@ -84,7 +82,8 @@ nest_in(c("Math", "Science", "Economics", "Art"),
         prefix = "student-",
         leading0 = 4)
 #> $Math
-#> [1] "student-0001" "student-0002" "student-0003"
+#>  [1] "student-0001" "student-0002" "student-0003" "student-0004" "student-0005"
+#>  [6] "student-0006" "student-0007" "student-0008" "student-0009" "student-0010"
 #> 
 #> $Science
 #> [1] "student-0001" "student-0002"
@@ -137,20 +136,20 @@ df <- data.frame(country = c("AU", "NZ", "JPN", "CHN", "USA")) %>%
                             . ~ 2)) # remaining have two rep
 
 tibble::as_tibble(df)
-#> # A tibble: 71 x 3
+#> # A tibble: 81 x 3
 #>    country soil     rep  
 #>    <chr>   <chr>    <chr>
 #>  1 AU      sample01 1    
 #>  2 AU      sample01 2    
 #>  3 AU      sample01 3    
-#>  4 JPN     sample01 1    
-#>  5 JPN     sample01 2    
-#>  6 JPN     sample01 3    
-#>  7 NZ      sample01 1    
-#>  8 NZ      sample01 2    
-#>  9 NZ      sample01 3    
-#> 10 CHN     sample01 1    
-#> # … with 61 more rows
+#>  4 NZ      sample01 1    
+#>  5 NZ      sample01 2    
+#>  6 NZ      sample01 3    
+#>  7 CHN     sample01 1    
+#>  8 CHN     sample01 2    
+#>  9 CHN     sample01 3    
+#> 10 USA     sample01 1    
+#> # … with 71 more rows
 ```
 
 ## `tidyverse`
