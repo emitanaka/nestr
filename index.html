@@ -31,7 +31,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
       </span>
     </div>
 
@@ -67,10 +67,24 @@
 <a href="#nestr" class="anchor"></a>nestr</h1></div>
 <!-- badges: start -->
 <!-- badges: end -->
+<div id="installation" class="section level2">
+<h2 class="hasAnchor">
+<a href="#installation" class="anchor"></a>Installation</h2>
+<p>You could install the stable version on CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"nestr"</span><span class="op">)</span></code></pre></div>
+<p>You could install the development version from Github using</p>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"emitanaka/nestr"</span><span class="op">)</span></code></pre></div>
+</div>
+<div id="getting-started" class="section level2">
+<h2 class="hasAnchor">
+<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nestr</span><span class="op">)</span></code></pre></div>
 <p>The main purpose of <code>nestr</code> R-package is to build nested (or hierarchical) structures with output as a list or a data frame. The syntax is particularly useful when the child units are unbalanced across the parental levels.</p>
-<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="fl">2</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 2 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
@@ -86,7 +100,7 @@
 <span class="co">#&gt; $b</span>
 <span class="co">#&gt; [1] "1"</span></code></pre></div>
 <p>The parental vector may be a factor with different ordering of the levels.</p>
-<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="fl">2</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 2 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
@@ -102,7 +116,7 @@
 <span class="co">#&gt; $b</span>
 <span class="co">#&gt; [1] "1"</span></code></pre></div>
 <p>Or you can refer the parental level by character.</p>
-<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="st">"b"</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># "b" has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
@@ -118,7 +132,7 @@
 <span class="co">#&gt; $b</span>
 <span class="co">#&gt; [1] "1" "2" "3"</span></code></pre></div>
 <p>A more interesting example.</p>
-<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Math"</span>, <span class="st">"Science"</span>, <span class="st">"Economics"</span>, <span class="st">"Art"</span><span class="op">)</span>, 
                <span class="st">"Science"</span> <span class="op">~</span> <span class="fl">2</span>,
     <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Art"</span>, <span class="st">"Math"</span><span class="op">)</span> <span class="op">~</span> <span class="fl">10</span>,
@@ -138,6 +152,7 @@
 <span class="co">#&gt; $Art</span>
 <span class="co">#&gt;  [1] "student-0001" "student-0002" "student-0003" "student-0004" "student-0005"</span>
 <span class="co">#&gt;  [6] "student-0006" "student-0007" "student-0008" "student-0009" "student-0010"</span></code></pre></div>
+</div>
 <div id="edibblenested_in-and-nestrnest_in" class="section level2">
 <h2 class="hasAnchor">
 <a href="#edibblenested_in-and-nestrnest_in" class="anchor"></a><code>edibble::nested_in</code> and <code>nestr::nest_in</code>
@@ -150,7 +165,7 @@
 <a href="#amplify" class="anchor"></a><code>amplify</code>
 </h2>
 <p>The <code>dplyr::mutate</code> function modifies, creates or deletes columns but doesn’t alter the number of rows. The <code><a href="reference/amplify.html">nestr::amplify</a></code> function can create new columns which generally increase (or amplify) the size of the row dimension. The columns that were amplified as a result of the created column will be duplicated. If you are familiar with gene replication process then you can recall these functions in those terms. An amplified gene is just a duplication of the original. A mutated gene modifies the original state.</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
   <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>soil <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">country</span>, 
                             <span class="st">"AU"</span> <span class="op">~</span> <span class="fl">10</span>,
@@ -184,7 +199,7 @@
 </h2>
 <p>For those who want to stay within the tidyverse framework, this is in fact doable just using <code>dplyr</code> and <code>tidyr</code>.</p>
 <p>The semantics are less direct, however and chaining of nesting structure is cumbersome. For example, see the equivalent example from before below.</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">dplyr</span><span class="op">)</span>
 <span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">tidyr</span><span class="op">)</span>
 <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op">%&gt;%</span> 
