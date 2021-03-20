@@ -7,6 +7,23 @@
 
 <!-- badges: end -->
 
+## Installation
+
+You could install the stable version on CRAN:
+
+``` r
+install.packages("nestr")
+```
+
+You could install the development version from Github using
+
+``` r
+# install.packages("remotes")
+remotes::install_github("emitanaka/nestr")
+```
+
+## Getting started
+
 ``` r
 library(nestr)
 ```
