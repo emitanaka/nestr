@@ -7,7 +7,7 @@ home:
 template:
   opengraph:
     twitter:
-      creator: "@emitanaka"
+      creator: "@statsgen"
       site: "@MonashEBS"
       card: summary_large_image
   params:
