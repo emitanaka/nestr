@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://nestr.emitanaka.org/index.html</loc>
+  </url>
+  <url>
+    <loc>https://nestr.emitanaka.org/reference/amplify.html</loc>
+  </url>
+  <url>
+    <loc>https://nestr.emitanaka.org/reference/nest_in.html</loc>
+  </url>
+  <url>
+    <loc>https://nestr.emitanaka.org/reference/nestr-package.html</loc>
+  </url>
+  <url>
+    <loc>https://nestr.emitanaka.org/reference/pipe.html</loc>
+  </url>
+</urlset>
