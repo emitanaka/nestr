@@ -1,0 +1,15 @@
+url: https://nestr.emitanaka.org
+
+home:
+  title: "nestr - an R package to build nesting or hierarchical structures"
+  description: Facilitates building a nesting or hierarchical structure as a list or data frame by using a human friendly syntax.
+
+template:
+  opengraph:
+    twitter:
+      creator: "@emitanaka"
+      site: "@MonashEBS"
+      card: summary_large_image
+  params:
+    bootswatch: united
+    ganalytics: G-4FHGR1FS5X
