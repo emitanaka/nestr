@@ -5,17 +5,22 @@
 
 <!-- badges: start -->
 
+[![Lifecycle:
+experimental](https://img.shields.io/badge/lifecycle-experimental-orange.svg)](https://www.tidyverse.org/lifecycle/#experimental)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/nestr)](https://CRAN.R-project.org/package=nestr)
 <!-- badges: end -->
 
 ## Installation
 
-You could install the stable version on CRAN:
+You can install the stable version on CRAN:
 
 ``` r
 install.packages("nestr")
 ```
 
-You could install the development version from Github using
+Or alternatively, you can install the development version from Github
+using below.
 
 ``` r
 # install.packages("remotes")
