@@ -78,7 +78,7 @@ nest_in <- function(x, ...,
     abort("No nesting structure specified.")
   }
 
-  levels <- levels(x) %||% sort(as.character(unique(x)))
+  levels <- levels(x) %||% as.character(unique(x))
   m <- length(levels)
   done <- rep(FALSE, m)
   reps <- vector(mode = "list", length = m)
