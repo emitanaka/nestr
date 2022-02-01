@@ -139,8 +139,9 @@ eval_formula <- function(f, env) {
     abort("Input must be two-sided formula.")
   }
   env <- f_env(f) %||% env
-  list(lhs = ifelse(is_symbol(lhs, name = "."),
-                    lhs,
-                    eval_tidy(lhs, env = env)),
+  if(!is_symbol(lhs, name = ".")) {
+    lhs <- eval_tidy(lhs, env = env)
+  }
+  list(lhs = lhs,
        rhs = eval_tidy(f_rhs(f), env = env))
 }
