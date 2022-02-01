@@ -1,4 +1,6 @@
-# nestr (development version)
+# nestr 0.1.2
+
+* Bug fixes
 
 # nestr 0.1.1
 
