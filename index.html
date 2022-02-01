@@ -28,6 +28,8 @@
 </script>
 </head>
 <body data-spy="scroll" data-target="#toc">
+    
+
     <div class="container template-home">
       <header><div class="navbar navbar-default navbar-fixed-top" role="navigation">
   <div class="container">
@@ -40,18 +42,12 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="Released version">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
       </span>
     </div>
 
     <div id="navbar" class="navbar-collapse collapse">
       <ul class="nav navbar-nav">
-<li>
-  <a href="index.html">
-    <span class="fas fa-home fa-lg"></span>
-     
-  </a>
-</li>
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
@@ -71,30 +67,30 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-<div id="nestr" class="section level1">
-<div class="page-header"><h1 class="hasAnchor">
-<a href="#nestr" class="anchor"></a>nestr</h1></div>
+<div class="section level1">
+<div class="page-header"><h1 id="nestr">nestr<a class="anchor" aria-label="anchor" href="#nestr"></a>
+</h1></div>
 <!-- badges: start -->
 
-<div id="installation" class="section level2">
-<h2 class="hasAnchor">
-<a href="#installation" class="anchor"></a>Installation</h2>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
 <p>You can install the stable version on CRAN:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html">install.packages</a></span><span class="op">(</span><span class="st">"nestr"</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"nestr"</span><span class="op">)</span></code></pre></div>
 <p>Or alternatively, you can install the development version from Github using below.</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="co"># install.packages("remotes")</span>
-<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html">install_github</a></span><span class="op">(</span><span class="st">"emitanaka/nestr"</span><span class="op">)</span></code></pre></div>
+<span class="fu">remotes</span><span class="fu">::</span><span class="fu"><a href="https://remotes.r-lib.org/reference/install_github.html" class="external-link">install_github</a></span><span class="op">(</span><span class="st">"emitanaka/nestr"</span><span class="op">)</span></code></pre></div>
 </div>
-<div id="getting-started" class="section level2">
-<h2 class="hasAnchor">
-<a href="#getting-started" class="anchor"></a>Getting started</h2>
+<div class="section level2">
+<h2 id="getting-started">Getting started<a class="anchor" aria-label="anchor" href="#getting-started"></a>
+</h2>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va">nestr</span><span class="op">)</span></code></pre></div>
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">nestr</span><span class="op">)</span></code></pre></div>
 <p>The main purpose of <code>nestr</code> R-package is to build nested (or hierarchical) structures with output as a list or a data frame. The syntax is particularly useful when the child units are unbalanced across the parental levels.</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="fl">2</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 2 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
 <span class="co">#&gt; $a</span>
@@ -110,7 +106,7 @@
 <span class="co">#&gt; [1] "1"</span></code></pre></div>
 <p>The parental vector may be a factor with different ordering of the levels.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>, <span class="co"># parental vector</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="fl">2</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># level 2 has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
 <span class="co">#&gt; $a</span>
@@ -126,7 +122,7 @@
 <span class="co">#&gt; [1] "1"</span></code></pre></div>
 <p>Or you can refer the parental level by character.</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, <span class="co"># parental vector</span>
         <span class="st">"b"</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># "b" has 3 children</span>
         <span class="va">.</span> <span class="op">~</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># the remaining levels have 1 child </span>
 <span class="co">#&gt; $a</span>
@@ -142,9 +138,9 @@
 <span class="co">#&gt; [1] "1" "2" "3"</span></code></pre></div>
 <p>A more interesting example.</p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Math"</span>, <span class="st">"Science"</span>, <span class="st">"Economics"</span>, <span class="st">"Art"</span><span class="op">)</span>, 
+<code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Math"</span>, <span class="st">"Science"</span>, <span class="st">"Economics"</span>, <span class="st">"Art"</span><span class="op">)</span>, 
                <span class="st">"Science"</span> <span class="op">~</span> <span class="fl">2</span>,
-    <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"Art"</span>, <span class="st">"Math"</span><span class="op">)</span> <span class="op">~</span> <span class="fl">10</span>,
+    <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"Art"</span>, <span class="st">"Math"</span><span class="op">)</span> <span class="op">~</span> <span class="fl">10</span>,
                     <span class="va">.</span> <span class="op">~</span> <span class="fl">3</span>,
         prefix <span class="op">=</span> <span class="st">"student-"</span>,
         leading0 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
@@ -162,20 +158,21 @@
 <span class="co">#&gt;  [1] "student-0001" "student-0002" "student-0003" "student-0004" "student-0005"</span>
 <span class="co">#&gt;  [6] "student-0006" "student-0007" "student-0008" "student-0009" "student-0010"</span></code></pre></div>
 </div>
-<div id="edibblenested_in-and-nestrnest_in" class="section level2">
-<h2 class="hasAnchor">
-<a href="#edibblenested_in-and-nestrnest_in" class="anchor"></a><code>edibble::nested_in</code> and <code>nestr::nest_in</code>
+<div class="section level2">
+<h2 id="edibblenested_in-and-nestrnest_in">
+<code>edibble::nested_in</code> and <code>nestr::nest_in</code>
+<a class="anchor" aria-label="anchor" href="#edibblenested_in-and-nestrnest_in"></a>
 </h2>
-<p>The syntax of <code>nestr</code> is similar to <code>edibble::nested_in</code> which is used within the <a href="https://edibble.emitanaka.org/reference/set_units.html"><code>edibble::set_units</code></a> to construct nested (or hierarchical) structures.</p>
+<p>The syntax of <code>nestr</code> is similar to <code>edibble::nested_in</code> which is used within the <a href="https://edibble.emitanaka.org/reference/set_units.html" class="external-link"><code>edibble::set_units</code></a> to construct nested (or hierarchical) structures.</p>
 <p>Unlike <code>edibble::nested_in</code>, the <code><a href="reference/nest_in.html">nestr::nest_in</a></code> returns a data frame. You may also notice that the name of the function is different although both share virtually the same syntax. One way to remember the differences in function name is that <code>nested_in</code> is for <code>edibble</code> and is meant for construction of the experimental design (notice the “ed” in the function name). When the verb is written in present tense (i.e. <code>nest_in</code>), it’s part of <code>nestr</code> and your focus is to create a structure in the present.</p>
 </div>
-<div id="amplify" class="section level2">
-<h2 class="hasAnchor">
-<a href="#amplify" class="anchor"></a><code>amplify</code>
+<div class="section level2">
+<h2 id="amplify">
+<code>amplify</code><a class="anchor" aria-label="anchor" href="#amplify"></a>
 </h2>
 <p>The <code>dplyr::mutate</code> function modifies, creates or deletes columns but doesn’t alter the number of rows. The <code><a href="reference/amplify.html">nestr::amplify</a></code> function can create new columns which generally increase (or amplify) the size of the row dimension. The columns that were amplified as a result of the created column will be duplicated. If you are familiar with gene replication process then you can recall these functions in those terms. An amplified gene is just a duplication of the original. A mutated gene modifies the original state.</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="va">df</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu"><a href="reference/amplify.html">amplify</a></span><span class="op">(</span>soil <span class="op">=</span> <span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="va">country</span>, 
                             <span class="st">"AU"</span> <span class="op">~</span> <span class="fl">10</span>,
                             <span class="st">"NZ"</span> <span class="op">~</span> <span class="fl">8</span>,
@@ -186,7 +183,7 @@
                           <span class="fl">1</span><span class="op">:</span><span class="fl">3</span> <span class="op">~</span> <span class="fl">3</span>, <span class="co"># first 3 samples have 3 technical rep</span>
                             <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># remaining have two rep</span>
 
-<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html">as_tibble</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
+<span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 81 x 3</span>
 <span class="co">#&gt;    country soil     rep  </span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;</span>
@@ -202,22 +199,22 @@
 <span class="co">#&gt; 10 USA     sample01 1    </span>
 <span class="co">#&gt; # … with 71 more rows</span></code></pre></div>
 </div>
-<div id="tidyverse" class="section level2">
-<h2 class="hasAnchor">
-<a href="#tidyverse" class="anchor"></a><code>tidyverse</code>
+<div class="section level2">
+<h2 id="tidyverse">
+<code>tidyverse</code><a class="anchor" aria-label="anchor" href="#tidyverse"></a>
 </h2>
 <p>For those who want to stay within the tidyverse framework, this is in fact doable just using <code>dplyr</code> and <code>tidyr</code>.</p>
 <p>The semantics are less direct, however and chaining of nesting structure is cumbersome. For example, see the equivalent example from before below.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org">dplyr</a></span><span class="op">)</span>
-<span class="kw"><a href="https://rdrr.io/r/base/library.html">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org">tidyr</a></span><span class="op">)</span>
-<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">mutate</span><span class="op">(</span>soil <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">country</span><span class="op">==</span><span class="st">"AU"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
-                          <span class="va">country</span><span class="op">==</span><span class="st">"NZ"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>,
-                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">soil</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
-  <span class="fu">mutate</span><span class="op">(</span>rep <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">soil</span> <span class="op"><a href="https://rdrr.io/r/base/match.html">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html">c</a></span><span class="op">(</span><span class="st">"sample01"</span>, <span class="st">"sample02"</span>, <span class="st">"sample03"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
-                           <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/%&gt;%.html">%&gt;%</a></span> 
+<code class="sourceCode R"><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://dplyr.tidyverse.org" class="external-link">dplyr</a></span><span class="op">)</span>
+<span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="https://tidyr.tidyverse.org" class="external-link">tidyr</a></span><span class="op">)</span>
+<span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span>country <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"AU"</span>, <span class="st">"NZ"</span>, <span class="st">"JPN"</span>, <span class="st">"CHN"</span>, <span class="st">"USA"</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">mutate</span><span class="op">(</span>soil <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">country</span><span class="op">==</span><span class="st">"AU"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span>,
+                          <span class="va">country</span><span class="op">==</span><span class="st">"NZ"</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">8</span><span class="op">)</span><span class="op">)</span>,
+                               <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/sprintf.html" class="external-link">sprintf</a></span><span class="op">(</span><span class="st">"sample%.2d"</span>, <span class="fl">1</span><span class="op">:</span><span class="fl">5</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">soil</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
+  <span class="fu">mutate</span><span class="op">(</span>rep <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">soil</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sample01"</span>, <span class="st">"sample02"</span>, <span class="st">"sample03"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
+                           <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">rep</span><span class="op">)</span>
 <span class="co">#&gt; # A tibble: 81 x 3</span>
 <span class="co">#&gt;    country soil       rep</span>
@@ -240,43 +237,55 @@
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
     <div class="links">
-<h2>Links</h2>
+<h2 data-toc-skip>Links</h2>
 <ul class="list-unstyled">
-<li>Download from CRAN at <br><a href="https://cloud.r-project.org/package=nestr">https://​cloud.r-project.org/​package=nestr</a>
-</li>
-</ul>
-</div>
-<div class="license">
-<h2>License</h2>
-<ul class="list-unstyled">
-<li><a href="LICENSE.html">Full license</a></li>
-<li><small><a href="https://opensource.org/licenses/mit-license.php">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
-</ul>
-</div>
-<div class="developers">
-<h2>Developers</h2>
-<ul class="list-unstyled">
-<li>Emi Tanaka <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-1455-259X" target="orcid.widget" aria-label="ORCID"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+<li><a href="https://cloud.r-project.org/package=nestr" class="external-link">View on CRAN</a></li>
 </ul>
 </div>
 
-  <div class="dev-status">
-<h2>Dev status</h2>
+<div class="license">
+<h2 data-toc-skip>License</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
-<li><a href="https://CRAN.R-project.org/package=nestr"><img src="https://www.r-pkg.org/badges/version/nestr" alt="CRAN status"></a></li>
+<li><a href="LICENSE.html">Full license</a></li>
+<li><small><a href="https://opensource.org/licenses/mit-license.php" class="external-link">MIT</a> + file <a href="LICENSE-text.html">LICENSE</a></small></li>
 </ul>
 </div>
+
+
+<div class="citation">
+<h2 data-toc-skip>Citation</h2>
+<ul class="list-unstyled">
+<li><a href="authors.html#citation">Citing nestr</a></li>
+</ul>
 </div>
+
+<div class="developers">
+<h2 data-toc-skip>Developers</h2>
+<ul class="list-unstyled">
+<li>Emi Tanaka <br><small class="roles"> Author, maintainer, copyright holder </small> <a href="https://orcid.org/0000-0002-1455-259X" target="orcid.widget" aria-label="ORCID" class="external-link"><span class="fab fa-orcid orcid" aria-hidden="true"></span></a> </li>
+</ul>
+</div>
+
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://CRAN.R-project.org/package=nestr" class="external-link"><img src="https://www.r-pkg.org/badges/version/nestr" alt="CRAN status"></a></li>
+</ul>
+</div>
+
+  </div>
 </div>
 
 
       <footer><div class="copyright">
-  <p>Developed by Emi Tanaka.</p>
+  <p></p>
+<p>Developed by Emi Tanaka.</p>
 </div>
 
 <div class="pkgdown">
-  <p>Site built with <a href="https://pkgdown.r-lib.org/">pkgdown</a> 1.6.1.</p>
+  <p></p>
+<p>Site built with <a href="https://pkgdown.r-lib.org/" class="external-link">pkgdown</a> 2.0.2.</p>
 </div>
 
       </footer>
@@ -284,6 +293,8 @@
 
   
 
+
+  
 
   </body>
 </html>
