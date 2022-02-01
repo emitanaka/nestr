@@ -42,7 +42,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="index.html">nestr</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.1.9000</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">0.1.2</span>
       </span>
     </div>
 
@@ -97,13 +97,13 @@
 <span class="co">#&gt; [1] "1"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $c</span>
-<span class="co">#&gt; [1] "1" "2" "3"</span>
+<span class="co">#&gt; [1] "1"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $a</span>
 <span class="co">#&gt; [1] "1"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $b</span>
-<span class="co">#&gt; [1] "1"</span></code></pre></div>
+<span class="co">#&gt; [1] "1" "2" "3"</span></code></pre></div>
 <p>The parental vector may be a factor with different ordering of the levels.</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span class="fu"><a href="reference/nest_in.html">nest_in</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"a"</span>, <span class="st">"b"</span><span class="op">)</span>, levels <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"a"</span>, <span class="st">"c"</span>, <span class="st">"b"</span><span class="op">)</span><span class="op">)</span>, <span class="co"># parental vector</span>
@@ -145,8 +145,7 @@
         prefix <span class="op">=</span> <span class="st">"student-"</span>,
         leading0 <span class="op">=</span> <span class="fl">4</span><span class="op">)</span>
 <span class="co">#&gt; $Math</span>
-<span class="co">#&gt;  [1] "student-0001" "student-0002" "student-0003" "student-0004" "student-0005"</span>
-<span class="co">#&gt;  [6] "student-0006" "student-0007" "student-0008" "student-0009" "student-0010"</span>
+<span class="co">#&gt; [1] "student-0001" "student-0002" "student-0003"</span>
 <span class="co">#&gt; </span>
 <span class="co">#&gt; $Science</span>
 <span class="co">#&gt; [1] "student-0001" "student-0002"</span>
@@ -184,20 +183,20 @@
                             <span class="va">.</span> <span class="op">~</span> <span class="fl">2</span><span class="op">)</span><span class="op">)</span> <span class="co"># remaining have two rep</span>
 
 <span class="fu">tibble</span><span class="fu">::</span><span class="fu"><a href="https://tibble.tidyverse.org/reference/as_tibble.html" class="external-link">as_tibble</a></span><span class="op">(</span><span class="va">df</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 81 x 3</span>
+<span class="co">#&gt; # A tibble: 71 × 3</span>
 <span class="co">#&gt;    country soil     rep  </span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;chr&gt;</span>
 <span class="co">#&gt;  1 AU      sample01 1    </span>
 <span class="co">#&gt;  2 AU      sample01 2    </span>
 <span class="co">#&gt;  3 AU      sample01 3    </span>
-<span class="co">#&gt;  4 NZ      sample01 1    </span>
-<span class="co">#&gt;  5 NZ      sample01 2    </span>
-<span class="co">#&gt;  6 NZ      sample01 3    </span>
-<span class="co">#&gt;  7 CHN     sample01 1    </span>
-<span class="co">#&gt;  8 CHN     sample01 2    </span>
-<span class="co">#&gt;  9 CHN     sample01 3    </span>
-<span class="co">#&gt; 10 USA     sample01 1    </span>
-<span class="co">#&gt; # … with 71 more rows</span></code></pre></div>
+<span class="co">#&gt;  4 JPN     sample01 1    </span>
+<span class="co">#&gt;  5 JPN     sample01 2    </span>
+<span class="co">#&gt;  6 JPN     sample01 3    </span>
+<span class="co">#&gt;  7 NZ      sample01 1    </span>
+<span class="co">#&gt;  8 NZ      sample01 2    </span>
+<span class="co">#&gt;  9 NZ      sample01 3    </span>
+<span class="co">#&gt; 10 CHN     sample01 1    </span>
+<span class="co">#&gt; # … with 61 more rows</span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="tidyverse">
@@ -216,7 +215,7 @@
   <span class="fu">mutate</span><span class="op">(</span>rep <span class="op">=</span> <span class="fu">case_when</span><span class="op">(</span><span class="va">soil</span> <span class="op"><a href="https://rdrr.io/r/base/match.html" class="external-link">%in%</a></span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"sample01"</span>, <span class="st">"sample02"</span>, <span class="st">"sample03"</span><span class="op">)</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">3</span><span class="op">)</span>,
                            <span class="cn">TRUE</span> <span class="op">~</span> <span class="fu"><a href="https://rdrr.io/r/base/list.html" class="external-link">list</a></span><span class="op">(</span><span class="fl">1</span><span class="op">:</span><span class="fl">2</span><span class="op">)</span><span class="op">)</span><span class="op">)</span> <span class="op"><a href="reference/pipe.html">%&gt;%</a></span> 
   <span class="fu">unnest_longer</span><span class="op">(</span><span class="va">rep</span><span class="op">)</span>
-<span class="co">#&gt; # A tibble: 81 x 3</span>
+<span class="co">#&gt; # A tibble: 81 × 3</span>
 <span class="co">#&gt;    country soil       rep</span>
 <span class="co">#&gt;    &lt;chr&gt;   &lt;chr&gt;    &lt;int&gt;</span>
 <span class="co">#&gt;  1 AU      sample01     1</span>
@@ -269,7 +268,7 @@
 <div class="dev-status">
 <h2 data-toc-skip>Dev status</h2>
 <ul class="list-unstyled">
-<li><a href="https://www.tidyverse.org/lifecycle/#experimental" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
+<li><a href="https://lifecycle.r-lib.org/articles/stages.html" class="external-link"><img src="https://img.shields.io/badge/lifecycle-experimental-orange.svg" alt="Lifecycle: experimental"></a></li>
 <li><a href="https://CRAN.R-project.org/package=nestr" class="external-link"><img src="https://www.r-pkg.org/badges/version/nestr" alt="CRAN status"></a></li>
 </ul>
 </div>
