@@ -53,7 +53,7 @@ nest_in(c("a", "c", "a", "b"), # parental vector
 The parental vector may be a factor with different ordering of the levels.
 
 ```{r}
-nest_in(factor(c("a", "c", "a", "b"), levels = c("a", "c", "b")), # parental vector
+nest_in(factor(c("a", "c", "a", "b"), levels = c("c", "a", "b")), # parental vector
         2 ~ 3, # level 2 has 3 children
         . ~ 1) # the remaining levels have 1 child 
 ```
