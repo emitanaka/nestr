@@ -2,7 +2,7 @@ pandoc: 2.7.3
 pkgdown: 2.0.2
 pkgdown_sha: ~
 articles: {}
-last_built: 2022-02-02T10:07Z
+last_built: 2022-02-02T10:15Z
 urls:
   reference: https://nestr.emitanaka.org/reference
   article: https://nestr.emitanaka.org/articles
